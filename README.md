@@ -1,2 +1,2 @@
-# School-Management-System
-The Smart School Management System
+# DBS25F004
+Database Final Project

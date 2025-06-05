@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="AddClass.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="AddCourse.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="AddEvent.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Admin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Announcement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Attendence.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="AttendenceReport.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Batches.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Class_course.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Class.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="coAnnouncements.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Coordinator.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Course.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="DashBoard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Event.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Exam.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ExamShedule.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Expense.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Fee.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Finance.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Hire.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Notification.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Payment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ProjectReport.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Result.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ResultEntry.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="SignUp.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Student.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="StudentInput.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Teacher.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

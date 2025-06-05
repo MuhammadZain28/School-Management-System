@@ -1,0 +1,112 @@
+﻿<Page x:Class="LMS.Event"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LMS"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Event">
+    <Grid Name="MainGrid" Background="#FFF1F1F1" ScrollViewer.CanContentScroll="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="150*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="110*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#FF2CB2D7" BorderThickness="0,0,0,1" Grid.ColumnSpan="7" Margin="0,0,0,5" Background="White" CornerRadius="0,0,0,1">
+        </Border>
+        <Label Grid.Column="1" Content="🕒   EVENTS" Margin="20,0,1,0" Grid.ColumnSpan="2" FontSize="30" FontFamily="Impact" VerticalAlignment="Top"/>
+        <Border BorderBrush="Black" BorderThickness="0" Grid.RowSpan="3" CornerRadius="15,15,15,15" Background="White" Grid.ColumnSpan="4" Margin="0,0,50,0" Grid.Row="1" Grid.Column="1">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.2" BlurRadius="10" ShadowDepth="3" Direction="270"/>
+            </Border.Effect>
+        </Border>
+
+        <Label Content="UPCOMING EVENT" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" BorderBrush="Black" BorderThickness="0,0,1,1" Margin="0" Grid.Column="1"/>
+        <Label x:Name="upcoming" Content="" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="2" Foreground="Black" BorderBrush="Black" BorderThickness="0,0,1,0" Margin="0" Grid.Column="1" Grid.RowSpan="2"/>
+        <Label x:Name="time" Content="" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="2" Foreground="Black" BorderBrush="Black" BorderThickness="0,0,0,0" Margin="0,0,50,0" Grid.Column="3" Grid.RowSpan="2"/>
+        <Border BorderBrush="Black" BorderThickness="0" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" Background="White" CornerRadius="15,0,0,15">
+            <Border.Effect>
+                <DropShadowEffect Direction="180" Opacity="0.2" BlurRadius="10" ShadowDepth="3"/>
+            </Border.Effect>
+        </Border>
+        <Button x:Name="add" Margin="57,0,10,0" FontWeight="ExtraBold" BorderBrush="Transparent" Foreground="White" Grid.Row="1" Grid.Column="5" FontSize="10" Height="23" VerticalAlignment="Center" Click="add_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="10">
+                        <ContentPresenter Content="➕   ADD" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.3" BlurRadius="10" ShadowDepth="3" Color="#6ae0f9" Direction="270"/>
+            </Button.Effect>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#FF2cb2d7" Offset="0"/>
+                    <GradientStop Color="#FF6AE0F9" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Calendar x:Name="calendar" Grid.Column="5" Margin="0,0,0,0" Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="0,0,0,1" Foreground="#FF333333" BorderBrush="#FF6AE0F9" SelectedDatesChanged="Calendar_SelectedDatesChanged">
+            <Calendar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF6CDAF8"/>
+                    <GradientStop Color="White" Offset="0.16"/>
+                    <GradientStop Color="White" Offset="0.16"/>
+                    <GradientStop Color="White" Offset="1"/>
+                    <GradientStop Color="#FF6AE0F9" Offset="0.159"/>
+                </LinearGradientBrush>
+            </Calendar.Background>
+        </Calendar>
+        <StackPanel Grid.Column="5" Grid.Row="5" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Label x:Name="eve" Content="Event : " FontSize="14" FontWeight="Bold" BorderThickness="2,0,0,0" Margin="0,0,0,3" BorderBrush="#FF67D3F7"/>
+            <Label x:Name="tim" Content="Time : "  FontSize="14" FontWeight="Bold" BorderThickness="2,0,0,0" Margin="0,0,0,3" BorderBrush="#FFCC67F7"/>
+        </StackPanel>
+        <Label Grid.Column="3" Content="TIME REMAINING" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" BorderBrush="Black" BorderThickness="0,0,0,1" Margin="0,1,50,0"/>
+        <Frame x:Name="Mainframe" Grid.RowSpan="10" Grid.ColumnSpan="8" Panel.ZIndex="2" Navigated="Mainframe_Navigated"/>
+        <DataGrid x:Name="SheduleGrid" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,10,50,0" Grid.RowSpan="30" Grid.Row="4" AutoGenerateColumns="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#FF2cb2d7"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Event" Binding="{Binding name}" Width="*"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='yyyy/MM/dd'}" Width="*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding description}" Width="2*"/>
+
+                <DataGridTemplateColumn Header="" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="🗑 Delete" Background="Red" Foreground="White" FontSize="12" Width="80" Click="Delete_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+
+</Page>

@@ -1,0 +1,119 @@
+﻿<Page x:Class="LMS.Login"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LMS"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Login">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                <GradientStop Color="#2cb2d7" Offset="1"/>
+                <GradientStop Color="#FFCFF4FC" Offset="0.2"/>
+                <GradientStop Color="#FFCFF4FC" Offset="0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Border BorderBrush="White" BorderThickness="1" CornerRadius="20,0,0,20" Opacity="1" Grid.RowSpan="11" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,0,0,0" Background="White">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="15" Opacity="0.4" Direction="125"/>
+            </Border.Effect>
+        </Border>
+        <TextBlock Margin="50,0,0,3" Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" Text="Username" VerticalAlignment="Bottom" Height="30" FontSize="18" FontWeight="Bold" Grid.ColumnSpan="2"/>
+
+        <TextBlock Margin="50,0,0,3" Grid.Column="2" Grid.Row="4" TextWrapping="Wrap" Text="Password" Height="27" FontSize="18" FontWeight="Bold" Grid.ColumnSpan="2" VerticalAlignment="Bottom"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="5" Grid.Column="2" Margin="50,2,50,5" CornerRadius="20" Background="#FFDCDADA" Grid.ColumnSpan="2">
+            <Grid>
+                <PasswordBox x:Name="PasswordBox" Margin="11,1,40,1"
+         BorderBrush="#72FFFFFF" BorderThickness="0"
+         VerticalAlignment="Center" FontSize="16"
+         PasswordChanged="PasswordBox_PasswordChanged" Background="{x:Null}">
+                    <PasswordBox.Style>
+                        <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource {x:Type PasswordBox}}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource Mode=Self}}"/>
+                                    <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </PasswordBox.Style>
+                </PasswordBox>
+
+                <TextBox x:Name="visibleBox" Margin="11,1,40,1"
+     VerticalAlignment="Center" FontSize="16"
+     Visibility="Collapsed" TextChanged="VisibleBox_TextChanged" BorderThickness="0,0,0,0" Background="{x:Null}"/>
+
+                <Button x:Name="toggleButton" Content="👁"
+    Margin="0,0,10,0" Background="Transparent" BorderThickness="0"
+    Click="ToggleButton_Click" HorizontalAlignment="Right" Width="25"/>
+            </Grid>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Row="3" Grid.Column="2" Margin="50,2,50,5" CornerRadius="20" Background="#FFDCDADA" Grid.ColumnSpan="2">
+            <TextBox x:Name="Email" TextWrapping="Wrap" Margin="11,1,11,1" BorderThickness="0" VerticalAlignment="Center" FontSize="16" Background="{x:Null}"/>
+
+        </Border>
+        <TextBlock Margin="9,1,9,4" TextWrapping="Wrap" Text="LOGIN" FontSize="30" TextAlignment="Center" Grid.ColumnSpan="4" Grid.Row="1" Grid.Column="2" FontFamily="Century Gothic" FontWeight="Bold"/>
+        <Button x:Name="sign_in" Content="SIGN IN" Margin="78,5,78,5" Grid.Row="7" Grid.Column="2" Background="#FF7A74DC" Grid.ColumnSpan="2" Foreground="#FFFEFAFA" BorderBrush="Black" FontFamily="Calibri" FontWeight="Bold" Click="sign_in_Click" >
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.2" ShadowDepth="1"/>
+            </Button.Effect>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#ffb03a"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Image Margin="117,33,117,16" Grid.Column="2" Source="C:\Users\user\Downloads\images/UserIcon.png" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="2" Margin="107,0,107,0" Grid.Row="8" TextWrapping="Wrap" Text="OR" TextAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <Rectangle Grid.Column="2" Height="2" Margin="34,13,19,14" Grid.Row="8" Stroke="Black" Width="Auto"/>
+        <Rectangle Grid.Column="4" Grid.ColumnSpan="2" Height="2" Margin="16,13,34,14" Grid.Row="8" Stroke="Black"/>
+        <Button x:Name="sign_up" Content="CREATE ACCOUNT" Margin="78,5,78,5" Grid.Row="9" Grid.Column="2" Background="{x:Null}" Grid.ColumnSpan="2" Foreground="Black" BorderBrush="Black" FontFamily="Calibri" FontWeight="Bold" Click="sign_up_Click" >
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.2" ShadowDepth="1"/>
+            </Button.Effect>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#ffb03a"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Image Grid.RowSpan="11" Grid.ColumnSpan="2" Margin="24,56,44,6" Source="C:\Users\user\Downloads\images/login.png"/>
+        <Frame x:Name="MainFrame" Grid.ColumnSpan="4" Grid.RowSpan="12" Panel.ZIndex="2" Navigated="MainFrame_Navigated"/>
+    </Grid>
+</Page>
