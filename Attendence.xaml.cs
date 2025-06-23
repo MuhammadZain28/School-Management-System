@@ -57,7 +57,7 @@ namespace LMS
                         batchId = Batch_id,
                         classId = class_id,
                         status = 'P',
-                        Adate = tday,
+                        Adate = tday.ToString("yyyy-MM-dd"),
                     });
                 }
                 else
@@ -85,7 +85,7 @@ namespace LMS
                         batchId = Batch_id,
                         classId = class_id,
                         status = 'A',
-                        Adate = tday,
+                        Adate = tday.ToString("yyyy-MM-dd"),
                     });
                 }
                 else
@@ -113,7 +113,7 @@ namespace LMS
                         batchId = Batch_id,
                         classId = class_id,
                         status = 'L',
-                        Adate = tday,
+                        Adate = tday.ToString("yyyy-MM-dd"),
                     });
                 }
                 else
@@ -132,7 +132,7 @@ namespace LMS
 
             std.ItemsSource = null;
             std.ItemsSource = students;
-
+            attenants = AttendenceD.getData(tday.ToString("yyyy-MM-dd"), class_id, Batch_id);
         }
         private void load()
         {
@@ -170,6 +170,8 @@ namespace LMS
                 date.IsEnabled = false;
                 Atd.Content = "Save";
                 load_data(Batch_id, class_id);
+                NavigationState.HasUnsavedChanges = true;
+                isMarked = true;
             }
             else if (isMarked)
             {
@@ -185,18 +187,34 @@ namespace LMS
                     abs.Content = attenants.Count(a => a.status == 'A');
                     leave.Content = attenants.Count(a => a.status == 'L');
                 }
+                NavigationState.HasUnsavedChanges = false;
+                isMarked= false;
             }
 
             else
             {
                 MessageBox.Show("Please Select Class, Batch or Date");
             }
-            isMarked = !isMarked;
         }
 
         private void date_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             tday = Convert.ToDateTime(date.SelectedDate);
+        }
+
+        private void teacher_attendence_click(object sender, RoutedEventArgs e)
+        {
+            if (isMarked)
+            {
+                MessageBoxResult result = MessageBox.Show("Do You want to save data?", "Unsaved Work", MessageBoxButton.YesNo, icon: MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    AttendenceB attendenceB = new AttendenceB();
+                    attendenceB.addAttendence(attenants);
+                    NavigationState.HasUnsavedChanges = false;
+                }
+            }
+            MainFrame.Navigate(new TeacherAttendence());
         }
     }
 }

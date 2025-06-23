@@ -30,6 +30,7 @@ namespace LMS
         private int exam {  get; set; }
         private int resultId { get; set; }
         public bool IsUpdate { get; set; }
+        public bool IsSaved = false;
         public ResultEntry(int Examid = -1, int classid = -1, int resultId = -1, bool isEdit = false )
         {
             InitializeComponent();
@@ -46,6 +47,10 @@ namespace LMS
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            AddData();
+        }
+        public void AddData()
         {
             if (!IsUpdate)
             {
@@ -66,6 +71,15 @@ namespace LMS
         }
         private void close_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBoxResult.No;
+            if (!IsSaved)
+            {
+                result = MessageBox.Show("Want to save data", "Unsaved Work", MessageBoxButton.YesNo);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                AddData();
+            }
             MainFrame.Navigate(new Result());
         }
 

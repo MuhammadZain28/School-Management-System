@@ -23,6 +23,7 @@ namespace LMS
     public partial class Payment : Page
     {
         public int PID { get; set; }
+        public bool IsSaved = false;
         public Payment(int id = -1)
         {
             InitializeComponent();
@@ -36,6 +37,10 @@ namespace LMS
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
+            AddData();
+        }
+        private void AddData()
+        {
             ExpenseB expenseB = GetExpense();
             if (expenseB.add(expenseB))
             {
@@ -46,9 +51,17 @@ namespace LMS
                 MessageBox.Show("Unsuccessful");
             }
         }
-
         private void close_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBoxResult.No;
+            if (!IsSaved)
+            {
+                result = MessageBox.Show("Want to save data", "Unsaved Work", MessageBoxButton.YesNo);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                AddData();
+            }
             MainFrame.Navigate(new Expense());
         }
         private ExpenseB GetExpense()

@@ -27,6 +27,7 @@ namespace LMS
     {
         private int ID {  get; set; }
         private bool Isupdate { get; set; }
+        private bool IsSaved = false;
         public ExamShedule(int id = -1, bool IsU = false)
         {
             InitializeComponent();
@@ -43,6 +44,10 @@ namespace LMS
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            AddData();
+        }
+        private void AddData()
         {
             if (!Isupdate)
             {
@@ -65,7 +70,6 @@ namespace LMS
                     MessageBox.Show("Unsuccessful");
             }
         }
-
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
 
@@ -98,6 +102,15 @@ namespace LMS
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBoxResult.No;
+            if (!IsSaved)
+            {
+                result = MessageBox.Show("Want to save data", "Unsaved Work", MessageBoxButton.YesNo);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                AddData();
+            }
             MainFrame.Navigate(new Exam());
         }
         private void View()

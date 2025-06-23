@@ -24,6 +24,7 @@ namespace LMS
     public partial class Fee : Page
     {
         private int feeId { get; set; }
+        private bool IsSaved = false;
         public Fee(int id = -1, bool isUpdate = false)
         {
             InitializeComponent();
@@ -38,6 +39,10 @@ namespace LMS
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            AddData();
+        }
+        private void AddData()
         {
             FeeB fee = inputData();
             if (feeId > 0)
@@ -63,9 +68,17 @@ namespace LMS
                 }
             }
         }
-
         private void Close_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBoxResult.No;
+            if (!IsSaved)
+            {
+                result = MessageBox.Show("Want to save data", "Unsaved Work", MessageBoxButton.YesNo);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                AddData();
+            }
             MainFrame.Navigate(new Finance());
         }
         private FeeB inputData()

@@ -26,6 +26,7 @@ namespace LMS
     public partial class StudentInput : Page
     {
         public int ID;
+        public bool IsSaved = false;
         public StudentInput(int id =-1, bool edit = false)
         {
             InitializeComponent();
@@ -42,31 +43,43 @@ namespace LMS
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
+            AddData();
+        }
+
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
+        private void AddData()
+        {
             if (ID < 0)
             {
-                string gender = "";
-                if (Male.IsChecked == true)
-                    gender = Male.Content.ToString();
-                else if (Female.IsChecked == true)
-                    gender = Female.Content.ToString();
-
-                var selectedBatch = batch.SelectedItem as KeyValuePair<int, string>?;
-                var selectedClass = @class.SelectedItem as KeyValuePair<int, string>?;
-
-                if (selectedBatch == null && selectedClass == null)
+                decimal feeAmount;
+                if (decimal.TryParse(Fee.Text, out feeAmount))
                 {
-                    MessageBox.Show("Please select a class.");
-                    return;
+                    var selectedBatch = batch.SelectedItem as KeyValuePair<int, string>?;
+                    var selectedClass = @class.SelectedItem as KeyValuePair<int, string>?;
+
+                    if (selectedBatch == null && selectedClass == null)
+                    {
+                        MessageBox.Show("Please select a class.");
+                        return;
+                    }
+
+                    string batchName = selectedBatch.Value.Value;
+                    string className = selectedClass.Value.Value;
+                    DateTime selectedDate = Admission.SelectedDate ?? DateTime.Now;
+                    StudentB studentB = new StudentB(0, name.Text, contact.Text, Roll.Text, feeAmount, address.Text, selectedDate.ToString("yyyy-MM-dd"), batchName, className);
+
+                    if (studentB.addStudent(selectedClass.Value.Key, selectedBatch.Value.Key))
+                    {
+                        MessageBox.Show("Student added sucessfully", "Message", MessageBoxButton.OK, icon: MessageBoxImage.Information);
+                        IsSaved = true;
+                    }
                 }
-
-                string batchName = selectedBatch.Value.Value;
-                string className = selectedClass.Value.Value;
-                DateTime selectedDate = Admission.SelectedDate ?? DateTime.Now;
-                StudentB studentB = new StudentB(0,name.Text, contact.Text, Roll.Text, gender, address.Text, selectedDate.ToString("yyyy-MM-dd"), batchName, className);
-
-                if (studentB.addStudent(selectedClass.Value.Key, selectedBatch.Value.Key))
+                else
                 {
-                    MainFrame.Navigate(new Student());
+                    MessageBox.Show("Invalid fee amount entered.");
                 }
 
             }
@@ -94,17 +107,12 @@ namespace LMS
                 }
             }
         }
-
-        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
-        {
-
-        }
         private Dictionary<int, string> loadComboBoxBatch()
         {
             Dictionary<int, string> batches = new Dictionary<int, string>();
             try
             {
-                string query = "SELECT batch_id, batch_name FROM batches;";
+                string query = "SELECT Branch_id, Branch_name FROM Branch;";
                 SqliteDataReader reader = DatabaseHelper.Instance.getData(query);
 
                 while (reader.Read())
@@ -150,6 +158,15 @@ namespace LMS
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBoxResult.No;
+            if (!IsSaved)
+            {
+                result = MessageBox.Show("Want to save data", "Unsaved Work", MessageBoxButton.YesNo);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                AddData();
+            }
             MainFrame.Navigate(new Student());
         }
         public void view()
@@ -173,14 +190,7 @@ namespace LMS
 
             Admission.SelectedDate = DateTime.ParseExact(student.admission_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
             address.Text = student.address;
-            if (student.gender == "Male")
-            {
-                Male.IsChecked = true;
-            }
-            else
-            {
-                Female.IsChecked = true;
-            }
+            Fee.Text = Convert.ToString(student.fee());
                 disable();
         }
         private void Update()
@@ -189,6 +199,7 @@ namespace LMS
             contact.IsEnabled = true;
             Roll.IsEnabled = true;
             address.IsEnabled = true;
+            Fee.IsEnabled = true ;
         }
         public void disable()
         {
@@ -199,8 +210,7 @@ namespace LMS
             batch.IsEnabled = false;
             address.IsEnabled = false;
             Admission.IsEnabled = false;
-            Male.IsEnabled = false;
-            Female.IsEnabled = false;
+            Fee.IsEnabled = false;
         }
     }
 }

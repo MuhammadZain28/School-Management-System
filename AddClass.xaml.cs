@@ -24,6 +24,7 @@ namespace LMS
     /// </summary>
     public partial class AddClass : Page
     {
+        public bool IsSaved = false;
         public AddClass()
         {
             InitializeComponent();
@@ -31,10 +32,23 @@ namespace LMS
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBoxResult.No;
+            if (!IsSaved)
+            {
+                result = MessageBox.Show("Want to save data", "Unsaved Work", MessageBoxButton.YesNo);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                AddData();
+            }
             MainFrame.Navigate(new Class_course());
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            AddData();
+        }
+        private void AddData()
         {
             if (Name.Text != null)
             {
@@ -43,7 +57,7 @@ namespace LMS
                 if (classB.InsertClass(classB))
                 {
                     MessageBox.Show("Success");
-                    MainFrame.Navigate(new Class_course());
+                    IsSaved = true;
                 }
                 else
                 {
@@ -56,7 +70,6 @@ namespace LMS
             }
 
         }
-
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)
         {
 

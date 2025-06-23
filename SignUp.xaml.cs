@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LMS.BL;
+using LMS.DL;
 using MessageBox = System.Windows.MessageBox;
 
 namespace LMS
@@ -105,17 +106,11 @@ namespace LMS
                 MessageBox.Show("Passwords do not match.");
                 return;
             }
-            UserB userB = new UserB(Email.Text, PasswordBox1.Password, Phone.Text);
 
-            bool result = userB.AddUser();
-
-            try
+            string otp = NotificationD.GenerateOtp();
+            if (NotificationD.SendOTP(Email.Text, otp))
             {
-                if (result)
-                    MainFrame.Navigate(new Login());
-            }
-            catch(Exception ex) {
-                MessageBox.Show("Error : " +  ex.Message);
+                MainFrame.Navigate(new OTP(otp, Email.Text, PasswordBox1.Password, Phone.Text));
             }
         }
         private void load()

@@ -20,7 +20,7 @@ namespace LMS
         {
             InitializeComponent();
             Choice = choice;
-            if (choice == 0 || choice == 4)
+            if (choice == 0 || choice == 2 || choice == 4 || choice == 5)
                 loadMonth();
             else
             {
@@ -70,7 +70,17 @@ namespace LMS
 
                     report.RegisterData(table, "Attendence");
                     report.GetDataSource("Attendence").Enabled = true;
-                    report.Load("FinanceReport.frx");
+
+                    string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "FinanceReport.frx");
+
+                    if (File.Exists(reportPath))
+                    {
+                        report.Load(reportPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Report file not found: " + reportPath);
+                    }
 
                     report.Prepare();
 
@@ -91,7 +101,7 @@ namespace LMS
                 int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
                 try
                 {
-                    DataTable table = new DataTable("Result");
+                    DataTable table = new DataTable("Student");
 
                     ResultB resultB = new ResultB();
 
@@ -99,9 +109,19 @@ namespace LMS
 
                     Report report = new Report();
 
-                    report.RegisterData(table, "Result");
-                    report.GetDataSource("Result").Enabled = true;
-                    report.Load("ResultReport.frx");
+                    report.RegisterData(table, "Student");
+                    report.GetDataSource("Student").Enabled = true;
+
+                    string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "ResultReport.frx");
+
+                    if (File.Exists(reportPath))
+                    {
+                        report.Load(reportPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Report file not found: " + reportPath);
+                    }
 
                     report.Prepare();
 
@@ -133,7 +153,19 @@ namespace LMS
 
                     report.RegisterData(table, "Finance");
                     report.GetDataSource("Finance").Enabled = true;
-                    report.Load("AttendaceReport.frx");
+
+
+                    string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "YearlyFinance.frx");
+
+                    if (File.Exists(reportPath))
+                    {
+                        report.Load(reportPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Report file not found: " + reportPath);
+                    }
+
 
                     report.Prepare();
 
@@ -154,21 +186,33 @@ namespace LMS
                 int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
                 try
                 {
-                    DataTable table = new DataTable("Teacher");
+                    DataTable table = new DataTable("Finance");
 
-                    TeacherB teacherB = new TeacherB();
+                    FeeB financeB = new FeeB();
 
-                    table = teacherB.GetDataTable();
+                    table = financeB.GetDataTable(selectedMonth);
 
                     Report report = new Report();
 
-                    report.RegisterData(table, "Teacher");
-                    report.GetDataSource("Teacher").Enabled = true;
-                    report.Load("TeacherReport.frx");
+                    report.RegisterData(table, "Finance");
+                    report.GetDataSource("Finance").Enabled = true;
+
+
+                    string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "MonthlyReport.frx");
+
+                    if (File.Exists(reportPath))
+                    {
+                        report.Load(reportPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Report file not found: " + reportPath);
+                    }
+
 
                     report.Prepare();
 
-                    string pdfFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TeacherOutput.pdf");
+                    string pdfFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MonthlyFinanceOutput.pdf");
                     report.Export(new PDFSimpleExport(), pdfFilePath);
 
                     WebBrowser pdfViewer = new WebBrowser();
@@ -183,23 +227,48 @@ namespace LMS
             else if (Choice == 4)
             {
                 int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
+                TeacherAttendenceB teacher = new TeacherAttendenceB();
+                var dialog = new Microsoft.Win32.SaveFileDialog
+                {
+                    Filter = "CSV file (*.csv)|*.csv",
+                    FileName = $"Attendance_Report_{DateTime.Now:yyyy_MM_dd}.csv"
+                };
+
+                if (dialog.ShowDialog() == true)
+                {
+                    teacher.ExportAttendanceToCSV(dialog.FileName, selectedMonth);
+                }
+            }
+
+            else if (Choice == 5)
+            {
+                int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
                 try
                 {
-                    DataTable table = new DataTable("Finance");
+                    DataTable table = new DataTable("Teacher_attendence");
 
-                    FeeB financeB = new FeeB();
 
-                    table = financeB.GetDataTableMonth(selectedMonth);
+                    table = SalaryD.GetSalaryReport(selectedMonth);
 
                     Report report = new Report();
 
-                    report.RegisterData(table, "Finance");
-                    report.GetDataSource("Finance").Enabled = true;
-                    report.Load("MonthlyReport.frx");
+                    report.RegisterData(table, "Teacher_attendence");
+                    report.GetDataSource("Teacher_attendence").Enabled = true;
+                    
+                    string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "TeacherAttendenceReport.frx");
+
+                    if (File.Exists(reportPath))
+                    {
+                        report.Load(reportPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Report file not found: " + reportPath);
+                    }
 
                     report.Prepare();
 
-                    string pdfFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MonthlyFinanceOutput.pdf");
+                    string pdfFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "TeacherSalaryOutput.pdf");
                     report.Export(new PDFSimpleExport(), pdfFilePath);
 
                     WebBrowser pdfViewer = new WebBrowser();

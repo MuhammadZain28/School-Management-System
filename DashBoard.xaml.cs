@@ -44,6 +44,8 @@ namespace LMS
             LineGraphModel = CreateLineGraph();
             BarModel = CreateHorizontalBarChart(); 
 
+            TeacherAttendenceB teacher = new TeacherAttendenceB();
+            teacher.Log();
 
             AttendenceB attendenceB = new AttendenceB();
             int present = attendenceB.count('P', DateTime.Now);
@@ -78,7 +80,6 @@ namespace LMS
         public PlotModel studentPie()
         {
             StudentB _student = new StudentB();
-            List<int> male = _student.Gender();
             var model = new PlotModel { };
             var pieSeries = new PieSeries
             {
@@ -89,12 +90,12 @@ namespace LMS
                 InnerDiameter = 0.6
             };
 
-            pieSeries.Slices.Add(new PieSlice("", male[0])
+            pieSeries.Slices.Add(new PieSlice("", 70)
             {
                 Fill = OxyColor.FromRgb(135, 206, 235)
             });
 
-            pieSeries.Slices.Add(new PieSlice("", male[1])
+            pieSeries.Slices.Add(new PieSlice("", 30)
             {
                 Fill = OxyColor.FromRgb(255, 165, 0)
             });

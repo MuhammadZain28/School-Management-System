@@ -21,27 +21,41 @@ namespace LMS
     /// </summary>
     public partial class Batches : Page
     {
+        private bool IsSaved = true;
         public Batches()
         {
             InitializeComponent();
         }
-
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            string Name = name.Text;
-            int Fee = Convert.ToInt32(fee.Text);
-            string stDate = DateTime.Now.ToString("yyyy-MM-dd");
-            string endDate = DateTime.Now.ToString("yyyy-MM-dd");
-            CourseB courseB = new CourseB();
-            //int id = ComboBox.SelectedIndex + 1;
-            //courseB.setCourseID(id)
-
-            BatchesB batchesB = new BatchesB(Name, stDate, endDate, Fee, courseB);
-            batchesB.addBatch();
+            AddData();
         }
-
+        private void AddData()
+        {
+            string Name = name.Text;
+            
+            BatchesB batchesB = new BatchesB();
+            if (batchesB.addBatch(Name))
+            {
+                name.Text = "";
+                IsSaved = true;
+            }
+        }
         private void close_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBoxResult.No;
+            if (!string.IsNullOrWhiteSpace(name.Text))
+            {
+                IsSaved = false; 
+            }
+            if (!IsSaved)
+            {
+                result = MessageBox.Show("Want to save data", "Unsaved Work", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    AddData();
+                }
+            }
             MainFrame.Navigate(new DashBoard());
         }
     }

@@ -63,7 +63,7 @@
                     <RowDefinition Height="45*"/>
                     <RowDefinition Height="45*"/>
                 </Grid.RowDefinitions>
-                <Image Source="images/Logo.png">
+                <Image Source="pack://siteoforigin:,,,/images/logo (2).ico">
                     <Image.Effect>
                         <DropShadowEffect Color="#FFF6F6F6" BlurRadius="50" Opacity="0.4" ShadowDepth="1"/>
                     </Image.Effect>

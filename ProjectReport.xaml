@@ -66,11 +66,17 @@
             </Border.Effect>
             <Button x:Name="fee" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,1,10,1" Content="MONTHLY FEE" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" Click="fee_Click" />
         </Border>
-        <Border BorderBrush="Black" BorderThickness="0"  CornerRadius="15,15,15,15" Background="White" Grid.ColumnSpan="5" Margin="0,11,5,0" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2">
+        <Border BorderBrush="Black" BorderThickness="0"  CornerRadius="15,15,15,15" Background="White" Grid.ColumnSpan="2" Margin="0,11,5,0" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.2" BlurRadius="10" ShadowDepth="3" Direction="270"/>
             </Border.Effect>
-            <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,1,10,1" Content="MONTHLY STUDENT PERFORMANCE" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" />
+            <Button x:Name="attendence" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,1,10,1" Content="MONTHLY TEACHER ATTENDENCE" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" Click="attendence_Click" />
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0"  CornerRadius="15,15,15,15" Background="White" Grid.ColumnSpan="3" Margin="5,11,0,0" Grid.Row="5" Grid.Column="3" Grid.RowSpan="2">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.2" BlurRadius="10" ShadowDepth="3" Direction="270"/>
+            </Border.Effect>
+            <Button x:Name="salary"  Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,1,10,1" Content="TEACHER SALARIES" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" Click="salary_Click" />
         </Border>
 
     </Grid>

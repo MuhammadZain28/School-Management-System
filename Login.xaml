@@ -92,7 +92,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Image Margin="117,33,117,16" Grid.Column="2" Source="C:\Users\user\Downloads\images/UserIcon.png" Grid.ColumnSpan="2"/>
+        <Image Margin="117,33,117,16" Grid.Column="2" Source="pack://siteoforigin:,,,/images/UserIcon.png" Grid.ColumnSpan="2"/>
         <TextBlock Grid.Column="2" Margin="107,0,107,0" Grid.Row="8" TextWrapping="Wrap" Text="OR" TextAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
         <Rectangle Grid.Column="2" Height="2" Margin="34,13,19,14" Grid.Row="8" Stroke="Black" Width="Auto"/>
         <Rectangle Grid.Column="4" Grid.ColumnSpan="2" Height="2" Margin="16,13,34,14" Grid.Row="8" Stroke="Black"/>
@@ -113,7 +113,11 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Image Grid.RowSpan="11" Grid.ColumnSpan="2" Margin="24,56,44,6" Source="C:\Users\user\Downloads\images/login.png"/>
-        <Frame x:Name="MainFrame" Grid.ColumnSpan="4" Grid.RowSpan="12" Panel.ZIndex="2" Navigated="MainFrame_Navigated"/>
+        <Image Grid.RowSpan="11" Grid.ColumnSpan="2" Margin="24,56,44,6" Source="pack://siteoforigin:,,,/images/login.png">
+            <Image.Effect>
+                <DropShadowEffect Color="#66000000" BlurRadius="20" ShadowDepth="8"/>
+            </Image.Effect>
+        </Image>
+        <Frame x:Name="MainFrame" Grid.ColumnSpan="4" Grid.RowSpan="11" Panel.ZIndex="2" Navigated="MainFrame_Navigated" Margin="0,-2,0,2"/>
     </Grid>
 </Page>

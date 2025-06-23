@@ -7,10 +7,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Hire">
-    <Grid Background="#B2F1F1F1" ScrollViewer.CanContentScroll="True">
+    <Grid Background="#B2F1F1F1" ScrollViewer.CanContentScroll="True" x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
-            <RowDefinition Height="80*"/>
+            <RowDefinition Height="90*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -19,7 +19,7 @@
             <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="#FFE9E9E9" BorderThickness="0" Grid.Column="1" Background="White" Grid.Row="1" Margin="10,0,10,0" CornerRadius="15">
+        <Border BorderBrush="#FFE9E9E9" BorderThickness="0" Grid.Column="1" Background="White" Grid.Row="1" Grid.RowSpan="3" Margin="10,0,10,10" CornerRadius="15">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Direction="270" Opacity="0.6" />
             </Border.Effect>
@@ -36,44 +36,68 @@
                     <RowDefinition Height="9*"/>
                     <RowDefinition Height="8*"/>
                     <RowDefinition Height="9*"/>
+                    <RowDefinition Height="12*"/>
                     <RowDefinition Height="8*"/>
                     <RowDefinition Height="9*"/>
-                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="9*"/>
                 </Grid.RowDefinitions>
-                <Label Content="TEACHER HIRING" FontFamily="Impact" FontSize="24" VerticalAlignment="Center" Grid.ColumnSpan="2" Background="{x:Null}" HorizontalAlignment="Center"/>
-                <Label Content="Name" FontSize="18" VerticalAlignment="Bottom" Grid.Row="1" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
-                <Label Content="Contact" FontSize="18" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Background="{x:Null}" Margin="30,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
+                <Label Content="STAFF HIRING" FontFamily="Impact" FontSize="24" VerticalAlignment="Center" Grid.ColumnSpan="2" Background="{x:Null}" HorizontalAlignment="Center"/>
                 <Label Content="Salary" FontSize="18" VerticalAlignment="Bottom" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
-                <Label Content="Institute" FontSize="18" VerticalAlignment="Bottom" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Background="{x:Null}" Margin="30,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
-                <Label Content="Degree" FontSize="18" VerticalAlignment="Bottom" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
                 <Label Content="Hiring Date" FontSize="18" VerticalAlignment="Bottom" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Background="{x:Null}" Margin="30,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
-                <Label Content="Passing Year" FontSize="18" VerticalAlignment="Bottom" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
-                <TextBox x:Name="name" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="30,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="2" Padding="10,0,0,0"/>
-                <TextBox x:Name="Contact" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="40,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Padding="10,0,0,0"/>
-                <TextBox x:Name="salary" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="30,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="4" Padding="10,0,0,0"/>
-                <TextBox x:Name="Degree" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="30,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="6" Padding="10,0,0,0"/>
-                <TextBox x:Name="Institute" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="40,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" Padding="10,0,0,0"/>
                 <DatePicker x:Name="Hiring" Margin="40,0,30,0" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Background="#FFE9E9E9"/>
-
-                <Border Grid.Column="0" Grid.Row="8" BorderThickness="1" VerticalAlignment="Center" Margin="40,0,30,0" Background="#FFEBEBEB" BorderBrush="#FF969696" CornerRadius="5">
-                    <ComboBox x:Name="Year" BorderThickness="0" Margin="2" ScrollViewer.CanContentScroll="False" Background="{x:Null}"/>
+                <Label Content="Name" FontSize="18" VerticalAlignment="Bottom" Grid.Row="1" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
+                <TextBox x:Name="name" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="30,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="2" Padding="10,0,0,0"/>
+                <Label Content="Contact" FontSize="18" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Background="{x:Null}" Margin="30,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
+                <TextBox x:Name="Contact" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="40,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Padding="10,0,0,0"/>
+                <Label Content="Branch" FontSize="18" VerticalAlignment="Bottom" Grid.Row="5" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
+                <Border Grid.Column="0" Grid.Row="6" BorderThickness="1" VerticalAlignment="Center" Margin="40,0,30,0" Background="#FFEBEBEB" BorderBrush="#FF969696" CornerRadius="5" Height="25">
+                    <ComboBox x:Name="Brach" BorderThickness="0" Margin="2" ScrollViewer.CanContentScroll="False" Background="{x:Null}"/>
                 </Border>
-                <Button x:Name="more" FontWeight="ExtraBold" BorderBrush="Transparent" Foreground="White" Grid.Row="7" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center" Height="33" HorizontalAlignment="Center" Width="158" Click="more_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="18">
-                                <ContentPresenter Content="ADD MORE" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                    <Button.Background>
-                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
-                            <GradientStop Color="#f49552" Offset="0"/>
-                            <GradientStop Color="#fdc6a3" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="Submit" FontWeight="ExtraBold" BorderBrush="Transparent" Foreground="White" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Height="33" HorizontalAlignment="Center" Width="158" Click="Submit_Click">
+                <Label Content="Designation" FontSize="18" VerticalAlignment="Bottom" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Background="{x:Null}" Margin="30,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
+                <TextBox x:Name="Job" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="40,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="6" Grid.Column="1" Padding="10,0,0,0"/>
+
+                <TextBox x:Name="salary" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="30,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="4" Padding="10,0,0,0"/>
+                <Expander x:Name="ex" Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="4" Header="     Add Qualification" FontSize="18" FontWeight="Bold" Expanded="Expander_Expanded" Collapsed="ex_Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                            <RowDefinition Height="20*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Degree" FontSize="18" VerticalAlignment="Center" Grid.Column="0" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
+                        <TextBox x:Name="Degree" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="30,11,30,0" Background="{x:Null}" VerticalAlignment="Top" Grid.Row="1" Padding="10,0,0,0" />
+
+                        <Label Content="Institute" FontSize="18" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Background="{x:Null}" Margin="30,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
+                        <TextBox x:Name="Institute" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="40,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Padding="10,0,0,0"/>
+
+                        <Label Content="Passing Year" FontSize="18" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
+                        <Border Grid.Column="0" Grid.Row="8" BorderThickness="1" VerticalAlignment="Center" Margin="40,0,30,0" Background="#FFEBEBEB" BorderBrush="#FF969696" CornerRadius="5" Height="25">
+                            <ComboBox x:Name="Year" BorderThickness="0" Margin="2" ScrollViewer.CanContentScroll="False" Background="{x:Null}"/>
+                        </Border>
+                        <Button x:Name="more" FontWeight="ExtraBold" BorderBrush="Transparent" Foreground="White" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center" Height="33" HorizontalAlignment="Center" Width="158" Click="more_Click" FontSize="14">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="18">
+                                        <ContentPresenter Content="SAVE" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                    <GradientStop Color="#f49552" Offset="0"/>
+                                    <GradientStop Color="#fdc6a3" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
+                </Expander>
+                <Button x:Name="Submit" FontWeight="ExtraBold" BorderBrush="Transparent" Foreground="White" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Height="33" HorizontalAlignment="Center" Width="158" Click="Submit_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="18">

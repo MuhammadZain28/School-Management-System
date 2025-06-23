@@ -7,10 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Attendence">
-    <Page.Resources>
-        <Storyboard x:Key="ExpandBorderStoryboard"/>
-        <Storyboard x:Key="UnExpandBorderStoryboard"/>
-    </Page.Resources>
 
     <Grid Name="MainGrid" Background="#FFF1F1F1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
         <Grid.ColumnDefinitions>
@@ -24,29 +20,29 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="45*"/>
-            <RowDefinition Height="30*"/>
             <RowDefinition Height="40*"/>
-            <RowDefinition Height="0*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
             <RowDefinition Height="125*"/>
             <RowDefinition Height="100*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="30*"/>
+            <RowDefinition Height="35*"/>
             <RowDefinition Height="50*"/>
-            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="#FF08236E" BorderThickness="0,0,0,1" Grid.ColumnSpan="7" Margin="0,0,0,5" Background="White" CornerRadius="0,0,0,1">
+        <Border BorderBrush="#FF08236E" BorderThickness="0,0,0,1" Grid.ColumnSpan="7" Margin="0,0,0,0" Background="White" CornerRadius="0,0,0,1">
         </Border>
+        <Button Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,0,10" BorderThickness="0,0,2,2" Background="#FFE5E4FA" FontFamily="Impact" FontSize="16" Content="STUDENT ATTENDENCE" BorderBrush="#FF847FE0"></Button>
+        <Button Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="7" Margin="0,0,0,10" Background="White" FontFamily="Impact" FontSize="16" Content="TEACHER ATTENDENCE" Click="teacher_attendence_click"></Button>
         <Label Grid.Column="1" Content="🕒   ATTENDENCE" Margin="20,0,1,0" Grid.ColumnSpan="2" FontSize="30" FontFamily="Impact" VerticalAlignment="Center"/>
-        <Border BorderBrush="Black" BorderThickness="0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" CornerRadius="15,15,0,0" Background="White" Grid.ColumnSpan="5">
+        <Border BorderBrush="Black" BorderThickness="0" Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" CornerRadius="15,15,0,0" Background="White" Grid.ColumnSpan="5">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.2" BlurRadius="10" ShadowDepth="3" Direction="270"/>
             </Border.Effect>
         </Border>
-        <Button x:Name="Atd" Margin="63,0,5,0" FontWeight="ExtraBold" BorderBrush="Transparent" Foreground="White" Grid.Row="2" Grid.Column="5" VerticalAlignment="Center" Height="33" Click="Atd_Click">
+        <Button x:Name="Atd" Margin="63,0,5,0" FontWeight="ExtraBold" Content="➕   ADD NEW" BorderBrush="Transparent" Foreground="White" Grid.Row="2" Grid.RowSpan="2" Grid.Column="5" VerticalAlignment="Center" Height="33" Click="Atd_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="18">
-                        <ContentPresenter Content="➕   ADD NEW" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
@@ -86,7 +82,7 @@
                     <DataGridTemplateColumn Header="Present" Width="80">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="present" Content="P" Background="Green" Foreground="White" FontSize="12" Width="80" Click="P_Click"/>
+                                <Button x:Name="present" Content="P" Background="#FF83DC74" Foreground="White" FontSize="12" Width="80" Click="P_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -94,30 +90,30 @@
                     <DataGridTemplateColumn Header="Absent" Width="80">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="absent" Content="A" Background="Red" Foreground="White" FontSize="12" Width="80" Click="A_Click"/>
+                                <Button x:Name="absent" Content="A" Background="#FFED5F5F" Foreground="White" FontSize="12" Width="80" Click="A_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Leave" Width="80">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="leave" Content="L" Background="Gold" Foreground="White" FontSize="12" Width="80" Click="L_Click"/>
+                                <Button x:Name="leave" Content="L" Background="#FFE0E946" Foreground="White" FontSize="12" Width="80" Click="L_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-        <Border Grid.Column="1" Grid.Row="2" BorderBrush="DimGray" BorderThickness="1" Margin="15,0,15,0" VerticalAlignment="Center" CornerRadius="5" Background="#FFE9E9E9">
+        <Border Grid.Column="1" Grid.Row="3" BorderBrush="DimGray" BorderThickness="1" Margin="15,0,15,0" VerticalAlignment="Center" CornerRadius="5" Background="#FFE9E9E9">
             <ComboBox x:Name="cal" ScrollViewer.CanContentScroll="False" Foreground="Black" Background="{x:Null}" BorderThickness="0" Margin="2" VerticalAlignment="Top" SelectionChanged="cal_SelectionChanged"/>
         </Border>
-        <Border Grid.Column="2" Grid.Row="2" BorderBrush="DimGray" BorderThickness="1" Margin="15,0,15,0" VerticalAlignment="Center" CornerRadius="5" Background="#FFE9E9E9">
+        <Border Grid.Column="2" Grid.Row="3" BorderBrush="DimGray" BorderThickness="1" Margin="15,0,15,0" VerticalAlignment="Center" CornerRadius="5" Background="#FFE9E9E9">
             <ComboBox x:Name="batch" ScrollViewer.CanContentScroll="False" Foreground="Black" Background="{x:Null}" BorderThickness="0" Margin="2" VerticalAlignment="Top" SelectionChanged="batch_SelectionChanged"/>
         </Border>
-        <Label Grid.Column="1" Grid.Row="1" Content="CLASS" Margin="4,0,2,0" FontSize="20" FontFamily="Impact" VerticalAlignment="Center"/>
-        <Label Grid.Column="2" Grid.Row="1" Content="BATCH" Margin="4,0,2,0" FontSize="20" FontFamily="Impact" VerticalAlignment="Center"/>
-        <Label Grid.Column="3" Grid.Row="1" Content="DATE" Margin="10,0,10,0" FontSize="20" FontFamily="Impact" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-        <Border Grid.Column="3" Grid.Row="2" Margin="10,0,10,0" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="30" CornerRadius="5" Background="#FFEBEBEB" BorderBrush="#FFA29C9C" BorderThickness="1">
+        <Label Grid.Column="1" Grid.Row="2" Content="CLASS" Margin="4,0,2,0" FontSize="20" FontFamily="Impact" VerticalAlignment="Center"/>
+        <Label Grid.Column="2" Grid.Row="2" Content="BATCH" Margin="4,0,2,0" FontSize="20" FontFamily="Impact" VerticalAlignment="Center"/>
+        <Label Grid.Column="3" Grid.Row="2" Content="DATE" Margin="10,0,10,0" FontSize="20" FontFamily="Impact" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <Border Grid.Column="3" Grid.Row="3" Margin="10,0,10,0" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="30" CornerRadius="5" Background="#FFEBEBEB" BorderBrush="#FFA29C9C" BorderThickness="1">
             <DatePicker x:Name="date" Grid.Column="2" Grid.Row="2" Margin="2" FontSize="14" FontFamily="Arial" Background="#FFEBEBEB" BorderThickness="0" Foreground="#FF191818" SelectedDateChanged="date_SelectedDateChanged"/>
         </Border>
         <Border Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="5" Grid.RowSpan="2" Background="#FFEBEBEB">
@@ -125,15 +121,15 @@
                 <DropShadowEffect Opacity="0.2" BlurRadius="10" ShadowDepth="3" Direction="270"/>
             </Border.Effect>
         </Border>
-        <Label Grid.Column="1" Grid.Row="7" Content="CLASS" Margin="0,0,0,0" FontSize="20" FontFamily="Impact" Foreground="White" Background="#FF7A74DC" Padding="9,5,5,5"/>
-        <Label Grid.Column="2" Grid.Row="7" Content="✔   PRESENT" Margin="0,0,0,0" FontSize="20" FontFamily="Impact" Foreground="White" Background="#FF83DC74" Padding="9,5,5,5"/>
-        <Label Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" Content="✖  ABSENT" Margin="0,0,0,0" FontSize="20" FontFamily="Impact" Foreground="White" Background="#FFED5F5F" Padding="9,5,5,5"/>
-        <Label Grid.Column="5" Grid.Row="7" Content="📄  LEAVE" Margin="0,0,0,0" FontSize="20" FontFamily="Impact" Foreground="White" Background="#FFE0E946" Padding="9,5,5,5"/>
-        <Label x:Name="classes" Grid.Column="1" Grid.Row="8" Content="LEAVE" Margin="0,0,0,0" FontSize="17" FontFamily="Impact" Foreground="Black" Background="White" Padding="9,5,5,5" BorderBrush="Black" BorderThickness="1"/>
-        <Label x:Name="pre" Grid.Column="2" Grid.Row="8" Content="LEAVE" Margin="0,0,0,0" FontSize="17" FontFamily="Impact" Foreground="Black" Background="White" Padding="9,5,5,5" BorderBrush="Black" BorderThickness="0,1,1,1"/>
-        <Label x:Name="abs" Grid.Column="3" Grid.Row="8" Grid.ColumnSpan="2" Content="LEAVE" Margin="0,0,0,0" FontSize="17" FontFamily="Impact" Foreground="Black" Background="White" Padding="9,5,5,5" BorderBrush="Black" BorderThickness="0,1,1,1"/>
-        <Label x:Name="leave" Grid.Column="5" Grid.Row="8" Content="LEAVE" Margin="0,0,0,0" FontSize="17" FontFamily="Impact" Foreground="Black" Background="White" Padding="9,5,5,5" BorderBrush="Black" BorderThickness="0,1,1,1"/>
-        <Border/>
+        <Label Grid.Column="1" Grid.Row="6" Content="🏠   CLASS" Margin="0,0,0,0" FontSize="20" FontFamily="Impact" Foreground="White" Background="#FF7A74DC" Padding="9,5,5,5"/>
+        <Label Grid.Column="2" Grid.Row="6" Content="✔   PRESENT" Margin="0,0,0,0" FontSize="20" FontFamily="Impact" Foreground="White" Background="#FF83DC74" Padding="9,5,5,5"/>
+        <Label Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="2" Content="✖  ABSENT" Margin="0,0,0,0" FontSize="20" FontFamily="Impact" Foreground="White" Background="#FFED5F5F" Padding="9,5,5,5"/>
+        <Label Grid.Column="5" Grid.Row="6" Content="📄  LEAVE" Margin="0,0,0,0" FontSize="20" FontFamily="Impact" Foreground="White" Background="#FFE0E946" Padding="9,5,5,5"/>
+        <Label x:Name="classes" Grid.Column="1" Grid.Row="7" Content="" Margin="0,0,0,0" FontSize="17" FontFamily="Impact" Foreground="Black" Background="White" Padding="9,5,5,5" BorderBrush="Black" BorderThickness="1"/>
+        <Label x:Name="pre" Grid.Column="2" Grid.Row="7" Content="" Margin="0,0,0,0" FontSize="17" FontFamily="Impact" Foreground="Black" Background="White" Padding="9,5,5,5" BorderBrush="Black" BorderThickness="0,1,1,1"/>
+        <Label x:Name="abs" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" Content="" Margin="0,0,0,0" FontSize="17" FontFamily="Impact" Foreground="Black" Background="White" Padding="9,5,5,5" BorderBrush="Black" BorderThickness="0,1,1,1"/>
+        <Label x:Name="leave" Grid.Column="5" Grid.Row="7" Content="" Margin="0,0,0,0" FontSize="17" FontFamily="Impact" Foreground="Black" Background="White" Padding="9,5,5,5" BorderBrush="Black" BorderThickness="0,1,1,1"/>
+        <Frame x:Name="MainFrame" Grid.ColumnSpan="8" Grid.RowSpan="10"/>
     </Grid>
 </Page>
 

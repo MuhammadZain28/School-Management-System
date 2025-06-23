@@ -49,5 +49,15 @@ namespace LMS
         {
 
         }
+
+        private void attendence_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new AttendenceReport(4));
+        }
+
+        private void salary_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new AttendenceReport(5));
+        }
     }
 }

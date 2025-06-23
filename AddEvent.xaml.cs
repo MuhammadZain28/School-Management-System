@@ -22,12 +22,17 @@ namespace LMS
     /// </summary>
     public partial class AddEvent : Page
     {
+        public bool IsSaved = false;
         public AddEvent()
         {
             InitializeComponent();
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            AddData();
+        }
+        public void AddData()
         {
             EventB eventB = InputData();
             if (eventB.AddEvent(eventB))
@@ -41,6 +46,15 @@ namespace LMS
         }
         private void close_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBoxResult.No;
+            if (!IsSaved)
+            {
+                result = MessageBox.Show("Want to save data", "Unsaved Work", MessageBoxButton.YesNo);
+            }
+            if (result == MessageBoxResult.Yes)
+            {
+                AddData();
+            }
             MainFrame.Navigate(new Event());
         }
         private void MainFrame_Navigated(object sender, NavigationEventArgs e)

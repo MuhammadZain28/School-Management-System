@@ -26,19 +26,22 @@
             <RowDefinition Height="45*"/>
             <RowDefinition Height="30*"/>
             <RowDefinition Height="40*"/>
-            <RowDefinition Height="0*"/>
+            <RowDefinition Height="40*"/>
             <RowDefinition Height="150*"/>
             <RowDefinition Height="150*"/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="#FF08236E" BorderThickness="0,0,0,1" Grid.ColumnSpan="7" Margin="0,0,0,5" Background="White" CornerRadius="0,0,0,1">
+        <Border BorderBrush="#FF08236E" BorderThickness="0,0,0,1" Grid.ColumnSpan="7" Margin="0,0,0,0" Background="White" CornerRadius="0,0,0,1">
         </Border>
         <Label Grid.Column="1" Content="💼   TEACHER" Margin="20,0,1,0" Grid.ColumnSpan="2" FontSize="30" FontFamily="Impact" VerticalAlignment="Center"/>
-        <Border BorderBrush="Black" BorderThickness="0" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Grid.RowSpan="2" CornerRadius="15,15,0,0" Background="White" Margin="0,0,0,0">
+
+        <Button Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,0,10" BorderThickness="0,0,2,2" Background="#FFE5E4FA" FontFamily="Impact" FontSize="16" Content="TEACHER" BorderBrush="#FF847FE0"></Button>
+        <Button Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="7" Margin="0,0,0,10" Background="White" FontFamily="Impact" FontSize="16" Content="SALARY" Click="Button_Click"></Button>
+        <Border BorderBrush="Black" BorderThickness="0" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="2" Grid.RowSpan="2" CornerRadius="15,15,0,0" Background="White" Margin="0,0,0,0">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.2" BlurRadius="10" ShadowDepth="3" Direction="270"/>
             </Border.Effect>
         </Border>
-        <Border BorderBrush="#FF969696" BorderThickness="1" Grid.Column="1" Grid.Row="2" CornerRadius="15,15,15,15" Background="#FFE9E9E9" VerticalAlignment="Center" Height="31" Margin="19,0,140,0" Grid.ColumnSpan="2">
+        <Border BorderBrush="#FF969696" BorderThickness="1" Grid.Column="1" Grid.Row="3" CornerRadius="15,15,15,15" Background="#FFE9E9E9" VerticalAlignment="Center" Height="31" Margin="19,0,140,0" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="90*"/>
@@ -63,7 +66,7 @@
 
             </Grid>
         </Border>
-        <Button x:Name="hire" Margin="56,0,12,0" FontWeight="ExtraBold" BorderBrush="Transparent" Foreground="White" Grid.Row="2" Grid.Column="5" VerticalAlignment="Center" Height="33" Click="hire_Click">
+        <Button x:Name="hire" Margin="56,0,12,0" FontWeight="ExtraBold" BorderBrush="Transparent" Foreground="White" Grid.Row="2" Grid.RowSpan="2" Grid.Column="5" VerticalAlignment="Center" Height="33" Click="hire_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="18">
@@ -81,10 +84,6 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Border Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" BorderBrush="#FF969696" BorderThickness="1" Height="30" Margin="101,0,0,0" Grid.ColumnSpan="2" Background="#FFE9E9E9" CornerRadius="5">
-            <ComboBox x:Name="cls" BorderBrush="#FF080A0B" BorderThickness="0" ScrollViewer.CanContentScroll="False" Foreground="Black" Background="{x:Null}" Margin="2">
-            </ComboBox>
-        </Border>
         <Border Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="4" Grid.RowSpan="2">
             <DataGrid x:Name="data" AutoGenerateColumns="False" Background="White" BorderBrush="Black" RowBackground="White" BorderThickness="0" FontSize="12" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ColumnWidth="*">
 
@@ -105,11 +104,11 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding id}" Width="50"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="130"/>
-                    <DataGridTextColumn Header="Contact" Binding="{Binding contact}" Width="130"/>
-                    <DataGridTextColumn Header="Joining Date" Binding="{Binding Joining}" Width="150"/>
-                    <DataGridTextColumn Header="Qualifications" Binding="{Binding Qualifications}" Width="*"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
+                    <DataGridTextColumn Header="Contact" Binding="{Binding contact}" Width="*"/>
+                    <DataGridTextColumn Header="Salary" Binding="{Binding salary}" Width="*"/>
+                    <DataGridTextColumn Header="Designation" Binding="{Binding designation}" Width="*"/>
+                    <DataGridTextColumn Header="Branch" Binding="{Binding Branch}" Width="*"/>
 
                     <DataGridTemplateColumn Header="" Width="80">
                         <DataGridTemplateColumn.CellTemplate>
@@ -133,8 +132,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
-        <Label Grid.Column="1" Grid.Row="1" Content="SEARCH" Margin="7,0,14,0" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" VerticalAlignment="Center"/>
-        <Label Grid.Column="3" Grid.Row="1" Content="FILTER" Margin="89,0,29,0" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" VerticalAlignment="Center"/>
+        <Label Grid.Column="1" Grid.Row="2" Content="SEARCH" Margin="7,0,14,0" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" VerticalAlignment="Center"/>
         <Frame x:Name="Mainframe" Grid.ColumnSpan="8" Grid.RowSpan="7" Panel.ZIndex="3" Navigated="Mainframe_Navigated"/>
     </Grid>
 </Page>

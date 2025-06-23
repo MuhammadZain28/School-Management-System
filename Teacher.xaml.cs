@@ -31,7 +31,6 @@ namespace LMS
         {
             InitializeComponent();
             teacherBs = new List<TeacherB>();
-            load_class();
             teacher_data();        
             isSearch = false;
         }
@@ -47,19 +46,6 @@ namespace LMS
                 int id = person.id;
                 Mainframe.Navigate(new Hire(id));
             }
-        }
-        private void  load_class()
-        {
-            cls.Items.Add("1st Class");
-            cls.Items.Add("2nd Class");
-            cls.Items.Add("3rd Class");
-            cls.Items.Add("4th Class");
-            cls.Items.Add("5th Class");
-            cls.Items.Add("6th Class");
-            cls.Items.Add("7th Class");
-            cls.Items.Add("8th Class");
-            cls.Items.Add("9th Class");
-            cls.Items.Add("10th Class");
         }
         private bool teacher_data()
         {
@@ -112,6 +98,11 @@ namespace LMS
                 data.ItemsSource = teacherBs;
             }
             isSearch = !isSearch;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Mainframe.Navigate(new Salary());
         }
     }
 }

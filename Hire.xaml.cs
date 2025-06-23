@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LMS.BL;
+using LMS.DL;
 using MessageBox = System.Windows.MessageBox;
 
 namespace LMS
@@ -25,11 +26,12 @@ namespace LMS
         private List<QualificationB> qualificationBs;
         private int id {  get; set; } 
         private int count { get; set; }
+        public bool IsSaved = true;
+        public bool isQualificationSaved { get; set; } = false;
         public Hire(int ID = 0)
         {
             InitializeComponent();
             qualificationBs = new List<QualificationB>();
-            Submit.IsEnabled = false;
             LoadYear();
             id = ID;
             if (id > 0)
@@ -61,6 +63,10 @@ namespace LMS
         }
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
+            AddData();
+        }
+        private void AddData()
+        {
             if (id == 0)
             {
                 TeacherB teacherB = new TeacherB();
@@ -68,8 +74,26 @@ namespace LMS
                 teacherB.contact = Contact.Text;
                 teacherB.salary = Convert.ToInt32(salary.Text);
                 teacherB.Joining = Hiring.Text;
+                teacherB.designation = Job.Text;
+                if (Brach.SelectedValue is int selectedBranchId)
+                {
+                    teacherB.branch.branchId = selectedBranchId;
+                }
+                else
+                {
+                    MessageBox.Show("Please select a branch.");
+                    return;
+                }
+
+                if (!string.IsNullOrWhiteSpace(Degree.Text) && !string.IsNullOrWhiteSpace(Institute.Text) && Year.SelectedItem == null)
+                {
+                    Addmore();
+                }
                 if (teacherB.addData(teacherB, qualificationBs))
                 {
+                    IsSaved = true;
+                    name.Text = "";
+                    Contact.Text = "";
                     MessageBox.Show("Teacher Added Successfully");
                     qualificationBs.Clear();
                 }
@@ -107,9 +131,21 @@ namespace LMS
                 }
             }
         }
-
         private void close_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult result = MessageBoxResult.No; 
+            if (!string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(Hiring.Text) && !string.IsNullOrWhiteSpace(Contact.Text))
+            {
+                IsSaved = false;
+            }
+            if (!IsSaved)
+            {
+                result = MessageBox.Show("Want to save data", "Unsaved Work", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    AddData();
+                }
+            }
             MainFrame.Navigate(new Teacher());
         }
 
@@ -123,28 +159,36 @@ namespace LMS
             {
                 Year.Items.Add(year.ToString());
             }
+            BatchesB batches = new BatchesB();
+            Brach.ItemsSource = batches.loadBatch();
+            Brach.DisplayMemberPath = "Value";
+            Brach.SelectedValuePath = "Key";
         }
 
         private void more_Click(object sender, RoutedEventArgs e)
         {
-                qualificationBs.Add(new QualificationB()
-                {
-                    degree = Degree.Text,
-                    institute = Institute.Text,
-                    year = Convert.ToInt32(Year.SelectedItem)
-                });
-                name.IsEnabled = false;
-                Contact.IsEnabled = false;
-                salary.IsEnabled = false;
-                Hiring.IsEnabled = false;
-                Degree.Text = "";
-                Institute.Text = "";
-                Degree.IsEnabled = true;
-                Institute.IsEnabled = true;
-                Year.IsEnabled = true;
-                Submit.IsEnabled = true;
+            Addmore();
         }
+        private void Addmore()
+        {
+            qualificationBs.Add(new QualificationB()
+            {
+                degree = Degree.Text,
+                institute = Institute.Text,
+                year = Convert.ToInt32(Year.SelectedItem)
+            });
+            name.IsEnabled = false;
+            Contact.IsEnabled = false;
+            salary.IsEnabled = false;
+            Hiring.IsEnabled = false;
+            Degree.Text = null;
+            Institute.Text = null;
+            Degree.IsEnabled = true;
+            Institute.IsEnabled = true;
+            Year.IsEnabled = true;
 
+            isQualificationSaved = true;
+        }
         private void update_Click(object sender, RoutedEventArgs e)
         {
             count = 0;
@@ -163,6 +207,25 @@ namespace LMS
             Year.IsEnabled = true;
             more.IsEnabled = true;
             Submit.IsEnabled = true;
+        }
+
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            RowDefinition newRow = new RowDefinition { Height = new GridLength(200, GridUnitType.Pixel) };
+            MainGrid.RowDefinitions.Add(newRow);
+        }
+
+        private void ex_Collapsed(object sender, RoutedEventArgs e)
+        {
+            if (MainGrid.RowDefinitions.Count > 2)
+            {
+                // Remove last child (if it's the one we added)
+                UIElement lastChild = MainGrid.Children[MainGrid.Children.Count - 1];
+                MainGrid.Children.Remove(lastChild);
+
+                // Remove last row definition
+                MainGrid.RowDefinitions.RemoveAt(MainGrid.RowDefinitions.Count - 1);
+            }
         }
     }
 }

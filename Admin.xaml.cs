@@ -13,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LMS.DL;
 
 namespace LMS
 {
@@ -25,9 +26,25 @@ namespace LMS
         public Admin()
         {
             InitializeComponent();
+            MainFrame.Navigating += MainFrame_Navigating;
             MainFrame.Navigate(new DashBoard());
         }
+        private void MainFrame_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            if (NavigationState.HasUnsavedChanges)
+            {
+                var result = MessageBox.Show("You have unsaved changes. Do you want to discard them?",
+                                             "Unsaved Work", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
+                if (result == MessageBoxResult.No)
+                {
+                    e.Cancel = true; // Cancel navigation
+                    return;
+                }
+
+                NavigationState.HasUnsavedChanges = false; // Reset flag if continuing
+            }
+        }
         private void Menu(object sender, RoutedEventArgs e)
         {
             if (!IsExpanded)

@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="Vb" ReferencedAssemblies="System.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;FastReport.Compat.dll&#13;&#10;FastReport.Forms.WPF.dll&#13;&#10;System.Drawing.Primitives&#13;&#10;FastReport.DataVisualization.dll&#13;&#10;System.Windows.Extensions.dll" ReportInfo.Created="05/12/2025 18:29:11" ReportInfo.Modified="05/13/2025 19:17:31" ReportInfo.CreatorVersion="2025.2.2.0">
+  <ScriptText>Imports System
+Imports System.Data.Odbc
+Imports System.Collections
+Imports System.Collections.Generic
+Imports System.ComponentModel
+Imports System.Windows.Forms
+Imports System.Drawing
+Imports Microsoft.VisualBasic
+Imports FastReport
+Imports FastReport.Data
+Imports FastReport.Dialog
+Imports FastReport.Table
+Imports FastReport.Barcode
+Imports FastReport.Utils
+
+Namespace FastReport
+  Public Class ReportScript
+                 
+
+  End Class
+End Namespace
+</ScriptText>
+  <Dictionary>
+    <OdbcDataConnection Name="Connection" ConnectionString="rijcmlqq6kXmTZpFrkXTh7jeRhtYroW67RPFG0UCeqVC4nlrqGmt89QnoO0JdMQ35XDjIA+mgcPxexe9s+aABkJRNOOJg==">
+      <TableDataSource Name="announcements" DataType="System.Int32" Enabled="true" TableName="announcements">
+        <Column Name="announcement_id" DataType="System.Int32"/>
+        <Column Name="title" DataType="System.String"/>
+        <Column Name="message" DataType="System.String"/>
+        <Column Name="date" DataType="System.DateTime"/>
+        <Column Name="announcement_for" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="attendance" DataType="System.Int32" Enabled="true" TableName="attendance">
+        <Column Name="attendance_id" DataType="System.Int32"/>
+        <Column Name="student_id" DataType="System.Int32"/>
+        <Column Name="class_id" DataType="System.Int32"/>
+        <Column Name="batch_id" DataType="System.Int32"/>
+        <Column Name="status" DataType="System.String"/>
+        <Column Name="date" DataType="System.DateTime"/>
+      </TableDataSource>
+      <TableDataSource Name="batches" DataType="System.Int32" Enabled="true" TableName="batches">
+        <Column Name="batch_id" DataType="System.Int32"/>
+        <Column Name="batch_name" DataType="System.String"/>
+        <Column Name="start_date" DataType="System.DateTime"/>
+        <Column Name="end_date" DataType="System.DateTime"/>
+        <Column Name="course_id" DataType="System.Int32"/>
+        <Column Name="fee" DataType="System.Decimal"/>
+      </TableDataSource>
+      <TableDataSource Name="class_schedule" DataType="System.Int32" Enabled="true" TableName="class_schedule">
+        <Column Name="schedule_id" DataType="System.Int32"/>
+        <Column Name="day_of_week" DataType="System.String"/>
+        <Column Name="start_time" DataType="System.TimeSpan"/>
+        <Column Name="end_time" DataType="System.TimeSpan"/>
+        <Column Name="teacher_id" DataType="System.Int32"/>
+        <Column Name="class_id" DataType="System.Int32"/>
+        <Column Name="course_id" DataType="System.Int32"/>
+      </TableDataSource>
+      <TableDataSource Name="classes" DataType="System.Int32" Enabled="true" TableName="classes">
+        <Column Name="class_id" DataType="System.Int32"/>
+        <Column Name="class_name" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="course_materials" DataType="System.Int32" Enabled="true" TableName="course_materials">
+        <Column Name="material_id" DataType="System.Int32"/>
+        <Column Name="course_id" DataType="System.Int32"/>
+        <Column Name="title" DataType="System.String"/>
+        <Column Name="file_link" DataType="System.String"/>
+        <Column Name="uploaded_date" DataType="System.DateTime"/>
+      </TableDataSource>
+      <TableDataSource Name="courses" DataType="System.Int32" Enabled="true" TableName="courses">
+        <Column Name="course_id" DataType="System.Int32"/>
+        <Column Name="course_name" DataType="System.String"/>
+        <Column Name="teacher_id" DataType="System.Int32"/>
+        <Column Name="type" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="events" DataType="System.Int32" Enabled="true" TableName="events">
+        <Column Name="event_id" DataType="System.Int32"/>
+        <Column Name="event_name" DataType="System.String"/>
+        <Column Name="date" DataType="System.DateTime"/>
+        <Column Name="description" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="exam_schedule" DataType="System.Int32" Enabled="true" TableName="exam_schedule">
+        <Column Name="exam_id" DataType="System.Int32"/>
+        <Column Name="course_id" DataType="System.Int32"/>
+        <Column Name="date" DataType="System.DateTime"/>
+        <Column Name="total_marks" DataType="System.Int32"/>
+        <Column Name="duration" DataType="System.String"/>
+        <Column Name="class_id" DataType="System.Int32"/>
+      </TableDataSource>
+      <TableDataSource Name="fee_records" DataType="System.Int32" Enabled="true" TableName="fee_records">
+        <Column Name="fee_id" DataType="System.Int32"/>
+        <Column Name="student_id" DataType="System.Int32"/>
+        <Column Name="amount_paid" DataType="System.Decimal"/>
+        <Column Name="due_amount" DataType="System.Decimal"/>
+        <Column Name="payment_date" DataType="System.DateTime"/>
+        <Column Name="status" DataType="System.Int16"/>
+      </TableDataSource>
+      <TableDataSource Name="logins" DataType="System.Int32" Enabled="true" TableName="logins">
+        <Column Name="user_id" DataType="System.Int32"/>
+        <Column Name="username" DataType="System.String"/>
+        <Column Name="password" DataType="System.String"/>
+        <Column Name="role" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="month_log" DataType="System.Int32" Enabled="true" TableName="month_log">
+        <Column Name="id" DataType="System.Int32"/>
+        <Column Name="log_date" DataType="System.DateTime"/>
+      </TableDataSource>
+      <TableDataSource Name="notifications" DataType="System.Int32" Enabled="true" TableName="notifications">
+        <Column Name="notif_id" DataType="System.Int32"/>
+        <Column Name="user_id" DataType="System.Int32"/>
+        <Column Name="message" DataType="System.String"/>
+        <Column Name="seen_status" DataType="System.Int16"/>
+        <Column Name="date" DataType="System.DateTime"/>
+      </TableDataSource>
+      <TableDataSource Name="payments" DataType="System.Int32" Enabled="true" TableName="payments">
+        <Column Name="PaymentID" DataType="System.Int32"/>
+        <Column Name="PaymentType" DataType="System.String"/>
+        <Column Name="Name" DataType="System.String"/>
+        <Column Name="ToEntity" DataType="System.String"/>
+        <Column Name="Contact" DataType="System.String"/>
+        <Column Name="PaymentDate" DataType="System.DateTime"/>
+        <Column Name="Amount_paid" DataType="System.Int32"/>
+      </TableDataSource>
+      <TableDataSource Name="results" DataType="System.Int32" Enabled="true" TableName="results">
+        <Column Name="result_id" DataType="System.Int32"/>
+        <Column Name="student_id" DataType="System.Int32"/>
+        <Column Name="obtained_marks" DataType="System.Int32"/>
+        <Column Name="grade" DataType="System.String"/>
+        <Column Name="remarks" DataType="System.String"/>
+        <Column Name="exam_id" DataType="System.Int32"/>
+      </TableDataSource>
+      <TableDataSource Name="salaries" DataType="System.Int32" Enabled="true" TableName="salaries">
+        <Column Name="salary_id" DataType="System.Int32"/>
+        <Column Name="teacher_id" DataType="System.Int32"/>
+        <Column Name="month" DataType="System.String"/>
+        <Column Name="amount_paid" DataType="System.Decimal"/>
+        <Column Name="payment_date" DataType="System.DateTime"/>
+      </TableDataSource>
+      <TableDataSource Name="students" DataType="System.Int32" Enabled="true" TableName="students">
+        <Column Name="student_id" DataType="System.Int32"/>
+        <Column Name="name" DataType="System.String"/>
+        <Column Name="roll_no" DataType="System.String"/>
+        <Column Name="age" DataType="System.Int32"/>
+        <Column Name="gender" DataType="System.String"/>
+        <Column Name="contact" DataType="System.String"/>
+        <Column Name="address" DataType="System.String"/>
+        <Column Name="admission_date" DataType="System.DateTime"/>
+        <Column Name="batch_id" DataType="System.Int32"/>
+        <Column Name="class_id" DataType="System.Int32"/>
+      </TableDataSource>
+      <TableDataSource Name="teacher_qualifications" DataType="System.Int32" Enabled="true" TableName="teacher_qualifications">
+        <Column Name="qualification_id" DataType="System.Int32"/>
+        <Column Name="teacher_id" DataType="System.Int32"/>
+        <Column Name="degree_name" DataType="System.String"/>
+        <Column Name="institute" DataType="System.String"/>
+        <Column Name="year" DataType="System.Int32"/>
+      </TableDataSource>
+      <TableDataSource Name="teachers" DataType="System.Int32" Enabled="true" TableName="teachers">
+        <Column Name="teacher_id" DataType="System.Int32"/>
+        <Column Name="name" DataType="System.String"/>
+        <Column Name="contact" DataType="System.String"/>
+        <Column Name="joining_date" DataType="System.DateTime"/>
+        <Column Name="salary" DataType="System.Int32"/>
+      </TableDataSource>
+      <TableDataSource Name="user_logs" DataType="System.Int32" Enabled="true" TableName="user_logs">
+        <Column Name="log_id" DataType="System.Int32"/>
+        <Column Name="user_id" DataType="System.Int32"/>
+        <Column Name="action" DataType="System.String"/>
+        <Column Name="timestamp" DataType="System.DateTime"/>
+      </TableDataSource>
+    </OdbcDataConnection>
+    <OdbcDataConnection Name="Connection1" ConnectionString="rijcmlqq6kXmTZpFrkXTh7jeRhtYroW67RPFG0UCeqVC4nlrqGmt89QnoO0JdMQ35XDjIA+5LWKc5ybJHHXEfhVL1hpKg==">
+      <TableDataSource Name="Table" Alias="AttendenceDataSet" DataType="System.Int32" Enabled="true" SelectCommand="select &#10;	a.student_id,&#10;	s.name as Student,&#10;	month(a.date) as Month,&#10;	year(a.date) as Year,&#10;	sum(case when a.status = 'P' then 1 else 0 end) as Presents,&#10;	sum(case when a.status = 'A' then 1 else 0 end) as Absents,&#10;	sum(case when a.status = 'L' then 1 else 0 end) as Leaves,&#10;	count(*) as total_classes&#10;from attendance a&#10;join students s &#10;on a.student_id = s.student_id&#10;join classes c &#10;on a.class_id = c.class_id&#10;group by s.student_id, s.name, month(a.date), year(a.date);&#10;">
+        <Column Name="student_id" DataType="System.Int32"/>
+        <Column Name="Student" DataType="System.String"/>
+        <Column Name="Month" DataType="System.Int64"/>
+        <Column Name="Year" DataType="System.Int64"/>
+        <Column Name="Presents" DataType="System.Decimal"/>
+        <Column Name="Absents" DataType="System.Decimal"/>
+        <Column Name="Leaves" DataType="System.Decimal"/>
+        <Column Name="total_classes" DataType="System.Int64"/>
+        <CommandParameter Name="Month" DataType="22"/>
+        <CommandParameter Name="Year" DataType="22"/>
+        <CommandParameter Name="Student" DataType="22"/>
+        <CommandParameter Name="Presents" DataType="17"/>
+        <CommandParameter Name="Absents" DataType="17"/>
+        <CommandParameter Name="Leaves" DataType="17"/>
+      </TableDataSource>
+    </OdbcDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" RawPaperSize="9" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="18.9">
+      <TextObject Name="Text1" Width="718.2" Height="18.9" Dock="Fill" Text="Monthly Attendence Report" AllowExpressions="false" Font="Arial, 10pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="21.57" Width="718.2" Height="47.25">
+      <TextObject Name="Text2" Width="718.2" Height="47.25" Dock="Fill" Anchor="Top, Bottom, Left, Right" Text="Attendence Report" AutoWidth="true" HorzAlign="Center" VertAlign="Center" Font="Arial, 16pt, style=Bold"/>
+    </PageHeaderBand>
+    <ColumnHeaderBand Name="ColumnHeader1" Top="71.48" Width="718.2" Height="37.8"/>
+    <DataBand Name="Data1" Top="111.95" Width="718.2" Height="349.65" Border.Lines="All" DataSource="Table" ResetPageNumber="true">
+      <TableObject Name="Table1" Width="718.2" Height="18.9" Dock="Top" Border.Lines="All">
+        <TableColumn Name="Column1" Width="143.64"/>
+        <TableColumn Name="Column2" Width="143.64"/>
+        <TableColumn Name="Column3" Width="143.64"/>
+        <TableColumn Name="Column4" Width="143.64"/>
+        <TableColumn Name="Column5" Width="143.64"/>
+        <TableRow Name="Row1">
+          <TableCell Name="Cell1" Border.Lines="All" Text="[AttendenceDataSet.Student]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell22" Border.Lines="All" Text="[AttendenceDataSet.Month]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell23" Border.Lines="All" Text="[AttendenceDataSet.Presents]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell24" Border.Lines="All" Text="[AttendenceDataSet.Absents]" Font="Arial, 10pt"/>
+          <TableCell Name="Cell25" Text="[AttendenceDataSet.Leaves]" HorzAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="464.27" Width="718.2" Height="28.35"/>
+  </ReportPage>
+</Report>

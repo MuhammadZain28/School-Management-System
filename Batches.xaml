@@ -10,14 +10,14 @@
 
     <Grid Background="#B2F1F1F1" ScrollViewer.CanContentScroll="True">
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="60*"/>
-            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="30*"/>
         </Grid.ColumnDefinitions>
 
         <Border BorderBrush="#FFE9E9E9" BorderThickness="0" Grid.Column="1" Background="White" Grid.Row="1" Margin="10,0,10,0" CornerRadius="15">
@@ -32,23 +32,11 @@
                     <RowDefinition Height="15*"/>
                     <RowDefinition Height="8*"/>
                     <RowDefinition Height="9*"/>
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="9*"/>
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="9*"/>
-                    <RowDefinition Height="8*"/>
-                    <RowDefinition Height="9*"/>
                     <RowDefinition Height="15*"/>
                 </Grid.RowDefinitions>
-                <Label Content="BATCH" FontFamily="Impact" FontSize="24" VerticalAlignment="Center" Grid.ColumnSpan="2" Background="{x:Null}" HorizontalAlignment="Center"/>
+                <Label Content="BRANCH" FontFamily="Impact" FontSize="24" VerticalAlignment="Center" Grid.ColumnSpan="2" Background="{x:Null}" HorizontalAlignment="Center"/>
                 <Label Content="Name" FontSize="18" VerticalAlignment="Bottom" Grid.Row="1" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
-                <Label Content="Ending Date" FontSize="18" VerticalAlignment="Bottom" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
-                <Label Content="Starting Date" FontSize="18" VerticalAlignment="Bottom" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
-                <Label Content="Fee" FontSize="18" VerticalAlignment="Bottom" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Background="{x:Null}" Margin="20,0,0,0" FontWeight="Bold" Padding="5,0,5,5"/>
                 <TextBox x:Name="name" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="30,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="2" Padding="10,0,0,0"/>
-                <TextBox x:Name="fee" BorderBrush="Black" BorderThickness="0,0,0,2" Margin="30,0,30,0" Background="{x:Null}" VerticalAlignment="Center" Grid.Row="8" Padding="10,0,0,0"/>
-                <DatePicker x:Name="end" Margin="30,0,30,0" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Background="#FFE9E9E9"/>
-                <DatePicker x:Name="start" Margin="30,0,30,0" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Background="#FFE9E9E9"/>
                 <Button x:Name="Submit" FontWeight="ExtraBold" BorderBrush="Transparent" Foreground="White" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Height="33" HorizontalAlignment="Center" Width="158" Click="Submit_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">

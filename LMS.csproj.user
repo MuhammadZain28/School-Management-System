@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>C:\Users\user\OneDrive\Documents\GitHub\DBS25F004\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Update="AddClass.xaml.cs">
       <SubType>Code</SubType>
@@ -71,6 +73,9 @@
     <Compile Update="Notification.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="OTP.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Payment.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -83,6 +88,9 @@
     <Compile Update="ResultEntry.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Salary.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="SignUp.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +101,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Teacher.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TeacherAttendence.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

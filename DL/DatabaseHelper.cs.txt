@@ -1,0 +1,65 @@
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+
+namespace ITEC_Management
+{
+    public class DatabaseHelper
+    {
+        private readonly string serverName = "127.0.0.1";
+        private readonly string port = "3306";
+        private readonly string databaseName = "ITEC";
+        private readonly string databaseUser = "root";
+        private readonly string databasePassword = "1234567890-=";
+
+        private static DatabaseHelper _instance;
+        private static readonly object _lock = new object();
+
+        private DatabaseHelper() { }
+
+        public static DatabaseHelper Instance
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    return _instance ??= new DatabaseHelper();
+                }
+            }
+        }
+
+        private string GetConnectionString()
+        {
+            return $"server={serverName};port={port};user={databaseUser};database={databaseName};password={databasePassword};SslMode=None;";
+        }
+
+        public SqliteConnection GetConnection()
+        {
+            var connection = new SqliteConnection(GetConnectionString());
+            connection.Open();
+            return connection;
+        }
+
+        public DataTable GetData(string query)
+        {
+            using (var connection = GetConnection())
+            using (var command = new SqliteCommand(query, connection))
+            using (var adapter = new SqliteDataAdapter(command))
+            {
+                var table = new DataTable();
+                adapter.Fill(table);
+                return table;
+            }
+        }
+
+        public int Execute(string query)
+        {
+            using (var connection = GetConnection())
+            using (var command = new SqliteCommand(query, connection))
+            {
+                return command.ExecuteNonQuery();
+            }
+        }
+    }
+}

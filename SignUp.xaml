@@ -95,7 +95,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Image Margin="106,9,107,18" Grid.Column="2" Source="images/UserIcon.png" Grid.ColumnSpan="2"/>
+        <Image Margin="106,9,107,18" Grid.Column="2" Source="pack://siteoforigin:,,,/images/UserIcon.png" Grid.ColumnSpan="2"/>
         <TextBlock Grid.Column="2" Margin="107,0,107,0" Grid.Row="12" TextWrapping="Wrap" Text="OR" TextAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="16"/>
         <Rectangle Grid.Column="2" Margin="82,13,67,14" Grid.Row="12" Stroke="Black" Width="100" Height="1"/>
         <Rectangle Grid.Column="3" Margin="66,13,84,14" Grid.Row="12" Stroke="Black" Width="100" Height="1"/>
@@ -116,8 +116,11 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Image Grid.RowSpan="14" Grid.ColumnSpan="2" Margin="24,56,44,6" Source="C:\Users\user\Downloads\images/login.png"/>
-        <Image Margin="22,1,0,9" Source="images/Logo.png" HorizontalAlignment="Left" Width="63"/>
+        <Image Grid.RowSpan="14" Grid.ColumnSpan="2" Margin="24,56,44,6" Source="pack://siteoforigin:,,,/images/login.png">
+            <Image.Effect>
+                <DropShadowEffect Color="#66000000" BlurRadius="20" ShadowDepth="8"/>
+            </Image.Effect>
+        </Image>
         <TextBlock Margin="50,0,0,0" Grid.Column="2" Grid.Row="6" TextWrapping="Wrap" Text="Password" Height="28" FontSize="18" FontWeight="Bold" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
         <TextBlock Margin="50,0,0,0" Grid.Column="2" Grid.Row="8" TextWrapping="Wrap" Text="Confirm Password" Height="28" FontSize="18" FontWeight="Bold" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Row="5" Grid.Column="2" Margin="50,0,50,0" CornerRadius="20" Background="#FFDCDADA" Grid.ColumnSpan="2">

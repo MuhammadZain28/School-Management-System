@@ -100,7 +100,6 @@ namespace LMS
             if (button?.DataContext is StudentB person)
             {
                 int Id = person.id;
-                MessageBox.Show("" + Id);
                 if (person.deleteData(Id))
                 {
                     MessageBox.Show("Deleted SuccessFully");
@@ -118,7 +117,7 @@ namespace LMS
         {
             List<StudentB> studentbs = new List<StudentB>();
             string nm = search.Text;
-            studentbs = students.FindAll(t => t.name.Length >= 3 && t.name.Substring(0, 3) == nm.Substring(0, 3));
+            studentbs = students.FindAll(t => t.name.Contains(nm, StringComparison.OrdinalIgnoreCase));
             if (!IsSearch)
             {
                 std.ItemsSource = null;
