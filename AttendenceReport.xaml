@@ -10,13 +10,41 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="13*"/>
+            <RowDefinition Height="46*"/>
+            <RowDefinition Height="83*"/>
+            <RowDefinition Height="46*"/>
+            <RowDefinition Height="73*"/>
+            <RowDefinition Height="65*"/>
             <RowDefinition Height="137*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="select" Content="Month" Margin="65,5,65,0" FontSize="20" FontWeight="Bold"/>
-        <Border VerticalAlignment="Top" Height="60" Margin="65,5,65,0" Background="#FFE9E9E9" CornerRadius="5" BorderBrush="#FF969696" BorderThickness="1" Grid.Row="2">
+        <Label x:Name="select" Content="Month" Margin="65,5,65,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Bottom"/>
+        <Border VerticalAlignment="Top" Height="40" Margin="65,16,65,0" Background="#FFE9E9E9" CornerRadius="5" BorderBrush="#FF969696" BorderThickness="1" Grid.Row="1">
             <ComboBox x:Name="month" BorderBrush="#FF00D0FF" BorderThickness="0" Margin="2" ScrollViewer.CanContentScroll="False" Background="{x:Null}" SelectionChanged="Month_SelectionChanged">
             </ComboBox>
         </Border>
+        <Border x:Name="brr" VerticalAlignment="Top" Height="40" Margin="65,3,65,0" Background="#FFE9E9E9" CornerRadius="5" BorderBrush="#FF969696" BorderThickness="1" Grid.Row="3">
+            <ComboBox x:Name="br" BorderBrush="#FF00D0FF" BorderThickness="0" Margin="2" ScrollViewer.CanContentScroll="False" Background="{x:Null}" SelectionChanged="Month_SelectionChanged">
+            </ComboBox>
+        </Border>
+        <Label x:Name="branch" Content="Branch" Margin="65,5,65,0" Grid.Row="2" FontSize="20" FontWeight="Bold"/>
+
+        <Button x:Name="Submit" FontWeight="ExtraBold" BorderBrush="Transparent" Foreground="White" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Height="33" HorizontalAlignment="Center" Width="158" Click="Submit_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="18">
+                        <ContentPresenter Content="GENERATE REPORT" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.3" BlurRadius="10" ShadowDepth="3" Color="#FFFDC6A3" Direction="270"/>
+            </Button.Effect>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="#f49552" Offset="0"/>
+                    <GradientStop Color="#fdc6a3" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

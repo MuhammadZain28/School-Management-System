@@ -271,7 +271,7 @@ namespace LMS.DL
             return dt;
         }
 
-        public static List<TeacherAttendenceB> TeacherattendenceReport(int month)
+        public static List<TeacherAttendenceB> TeacherattendenceReport(int month, int branch)
         {
             List<TeacherAttendenceB> dt = new List<TeacherAttendenceB>();
             MessageBox.Show("" + month);

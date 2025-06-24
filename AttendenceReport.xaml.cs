@@ -25,7 +25,16 @@ namespace LMS
             else
             {
                 select.Content = "Year";
-                loadYear();
+                loadYear(); 
+            }
+            if (choice != 4 && choice != 5 && choice != 3)
+            {
+                branch.Opacity = 0;
+                branch.IsEnabled = false;
+                br.Opacity = 0;
+                br.IsEnabled = false;
+                brr.Opacity = 0;
+                brr.IsEnabled = false;
             }
         }
 
@@ -51,9 +60,18 @@ namespace LMS
             {
                 month.Items.Add(i);
             }
+            BatchesB batchesB = new BatchesB();
+            br.ItemsSource = batchesB.loadBatch();
+            br.DisplayMemberPath = "Value";
+            br.SelectedValuePath = "Key";
         }
 
         private void Month_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Submit_Click(object sender, RoutedEventArgs e)
         {
             if (Choice == 0)
             {
@@ -227,6 +245,7 @@ namespace LMS
             else if (Choice == 4)
             {
                 int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
+                int selectedBatch = Convert.ToInt32(br.SelectedValue.ToString());
                 TeacherAttendenceB teacher = new TeacherAttendenceB();
                 var dialog = new Microsoft.Win32.SaveFileDialog
                 {
@@ -236,25 +255,26 @@ namespace LMS
 
                 if (dialog.ShowDialog() == true)
                 {
-                    teacher.ExportAttendanceToCSV(dialog.FileName, selectedMonth);
+                    teacher.ExportAttendanceToCSV(dialog.FileName, selectedMonth, selectedBatch);
                 }
             }
 
             else if (Choice == 5)
             {
                 int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
+                int selectedBatch = Convert.ToInt32(br.SelectedValue.ToString());
                 try
                 {
                     DataTable table = new DataTable("Teacher_attendence");
 
 
-                    table = SalaryD.GetSalaryReport(selectedMonth);
+                    table = SalaryD.GetSalaryReport(selectedMonth, selectedBatch);
 
                     Report report = new Report();
 
                     report.RegisterData(table, "Teacher_attendence");
                     report.GetDataSource("Teacher_attendence").Enabled = true;
-                    
+
                     string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "TeacherAttendenceReport.frx");
 
                     if (File.Exists(reportPath))

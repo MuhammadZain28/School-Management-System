@@ -84,7 +84,7 @@ namespace LMS
 
         private void Attendence(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new Attendence());
+            MainFrame.Navigate(new TeacherAttendence());
         }
 
         private void Logout(object sender, RoutedEventArgs e)

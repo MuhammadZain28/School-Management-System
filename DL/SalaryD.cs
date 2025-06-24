@@ -182,7 +182,7 @@ namespace LMS.DL
                 return false;
             }
         }
-        public static DataTable GetSalaryReport(int month)
+        public static DataTable GetSalaryReport(int month, int branch)
         {
             string query = $"Select * from salary_report where cast(strftime('%m', `Payment Date`) as INT) = {month}";
             DataTable dataTable = new DataTable();

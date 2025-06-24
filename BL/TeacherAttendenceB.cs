@@ -54,9 +54,9 @@ namespace LMS.BL
                 MessageBox.Show("New Month Started!");
             }
         }
-        public void ExportAttendanceToCSV(string filePath, int month)
+        public void ExportAttendanceToCSV(string filePath, int month, int branch)
         {
-            List<TeacherAttendenceB> entries = AttendenceD.TeacherattendenceReport(month);
+            List<TeacherAttendenceB> entries = AttendenceD.TeacherattendenceReport(month, branch);
             var names = entries.Select(e => e.name).Distinct().OrderBy(n => n).ToList();
             var dates = entries.Select(e => e.date).Distinct().OrderBy(d => d).ToList();
 
