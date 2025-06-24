@@ -27,12 +27,12 @@ namespace LMS
         List<TeacherAttendenceB> attenants;
         private DateTime tday { get; set; }
         private bool isMarked { get; set; }
+        private bool manualSelect { get; set; } = false;
 
         public TeacherAttendence()
         {
             InitializeComponent();
-
-
+            NavigationState.timespan = DateTime.Now.ToString("hh:mm tt");
         }
 
         private void student_click(object sender, RoutedEventArgs e)
@@ -47,7 +47,11 @@ namespace LMS
                 int id = person.id;
                 TeacherAttendenceB attendenceB = new TeacherAttendenceB();
                 int index = attenants.FindIndex(r => r.teacher_id == id);
-
+                if (manualSelect && !NavigationState.SelectSame)
+                {
+                    Time time1 = new Time();
+                    time1.ShowDialog();
+                }
                 if (index == -1)
                 {
                     attenants.Add(new TeacherAttendenceB
@@ -58,12 +62,12 @@ namespace LMS
                         },
                         status = "P",
                         date = tday.ToString("yyyy-MM-dd"),
-                        checkIn = DateTime.Now.ToString("HH:mm:ss"),
+                        checkIn = NavigationState.timespan,
                     });
                 }
                 else
                 {
-                    attenants = attendenceB.UpdateAttendanceIfExists(attenants, index, "P", DateTime.Now.ToString("HH:mm:ss"));
+                    attenants = attendenceB.UpdateAttendanceIfExists(attenants, index, "P", NavigationState.timespan);
                 }
                 button.Background = new SolidColorBrush(Colors.LightGray);
                 button.Foreground = new SolidColorBrush(Colors.Black);
@@ -153,6 +157,7 @@ namespace LMS
                 Atd.Content = "💾   SAVE";
                 load_data();
                 isMarked = true;
+                NavigationState.SelectSame = false;
                 NavigationState.HasUnsavedChanges = true;
             }
             else if (isMarked)
@@ -201,6 +206,11 @@ namespace LMS
         private void out_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
+            if (manualSelect && !NavigationState.SelectSame)
+            {
+                Time time1 = new Time();
+                time1.ShowDialog();
+            }
             if (button?.DataContext is TeacherB person)
             {
                 int Id = person.id;
@@ -211,11 +221,22 @@ namespace LMS
 
                 MessageBox.Show("Index " + index);
 
-                attendenceB.Out(attenants, index, DateTime.Now.ToString("HH:mm:ss"));
+                attendenceB.Out(attenants, index, NavigationState.timespan);
 
                 button.Background = new SolidColorBrush(Colors.LightGray);
                 button.Foreground = new SolidColorBrush(Colors.Black);
             }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            manualSelect = true;
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            NavigationState.timespan = DateTime.Now.ToString("hh:mm tt");
+            manualSelect = false;
         }
     }
 }

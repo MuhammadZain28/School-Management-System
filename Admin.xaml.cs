@@ -43,6 +43,7 @@ namespace LMS
                 }
 
                 NavigationState.HasUnsavedChanges = false; // Reset flag if continuing
+                NavigationState.SelectSame = false;
             }
         }
         private void Menu(object sender, RoutedEventArgs e)

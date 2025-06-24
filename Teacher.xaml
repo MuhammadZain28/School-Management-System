@@ -108,7 +108,7 @@
                     <DataGridTextColumn Header="Contact" Binding="{Binding contact}" Width="*"/>
                     <DataGridTextColumn Header="Salary" Binding="{Binding salary}" Width="*"/>
                     <DataGridTextColumn Header="Designation" Binding="{Binding designation}" Width="*"/>
-                    <DataGridTextColumn Header="Branch" Binding="{Binding Branch}" Width="*"/>
+                    <DataGridTextColumn Header="Branch" Binding="{Binding branch_name}" Width="*"/>
 
                     <DataGridTemplateColumn Header="" Width="80">
                         <DataGridTemplateColumn.CellTemplate>

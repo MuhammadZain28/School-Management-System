@@ -106,5 +106,11 @@
     <Compile Update="TeacherAttendence.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Time.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Timespan.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
