@@ -18,7 +18,7 @@
             <RowDefinition Height="137*"/>
         </Grid.RowDefinitions>
         <Label x:Name="select" Content="Month" Margin="65,5,65,0" FontSize="20" FontWeight="Bold" VerticalAlignment="Bottom"/>
-        <Border VerticalAlignment="Top" Height="40" Margin="65,16,65,0" Background="#FFE9E9E9" CornerRadius="5" BorderBrush="#FF969696" BorderThickness="1" Grid.Row="1">
+        <Border VerticalAlignment="Top" Height="40" Margin="65,4,65,0" Background="#FFE9E9E9" CornerRadius="5" BorderBrush="#FF969696" BorderThickness="1" Grid.Row="1">
             <ComboBox x:Name="month" BorderBrush="#FF00D0FF" BorderThickness="0" Margin="2" ScrollViewer.CanContentScroll="False" Background="{x:Null}" SelectionChanged="Month_SelectionChanged">
             </ComboBox>
         </Border>

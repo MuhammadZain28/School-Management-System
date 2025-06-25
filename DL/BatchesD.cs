@@ -13,7 +13,19 @@ namespace LMS.DL
 {
     class BatchesD
     {
-        public bool addBatch(string batchName)
+        private static BatchesD? instance = null;
+        public static BatchesD Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new BatchesD();
+                }
+                return instance;
+            }
+        }
+        public static bool addBatch(string batchName)
         {
             try
             {
@@ -30,7 +42,7 @@ namespace LMS.DL
             }
         }
 
-        public Dictionary<int, string> loadComboBoxBatch()
+        public static Dictionary<int, string> loadComboBoxBatch()
         {
             Dictionary<int, string> batches = new Dictionary<int, string>();
             try

@@ -10,6 +10,7 @@ using LMS.BL;
 using WebBrowser = System.Windows.Controls.WebBrowser;
 using MessageBox = System.Windows.MessageBox;
 using System.Data;
+using FastReport.Utils;
 
 namespace LMS
 {
@@ -20,14 +21,15 @@ namespace LMS
         {
             InitializeComponent();
             Choice = choice;
-            if (choice == 0 || choice == 2 || choice == 4 || choice == 5)
+            loadBatch();
+            if (choice == 0 || choice == 2 || choice == 3 || choice == 4 || choice == 5)
                 loadMonth();
             else
             {
                 select.Content = "Year";
                 loadYear(); 
             }
-            if (choice != 4 && choice != 5 && choice != 3)
+            if (choice != 4 && choice != 5)
             {
                 branch.Opacity = 0;
                 branch.IsEnabled = false;
@@ -53,17 +55,19 @@ namespace LMS
             month.SelectedValuePath = "Key";
             return months;
         }
-
+        private void loadBatch()
+        {
+            BatchesB batchesB = new BatchesB();
+            br.ItemsSource = batchesB.loadBatch();
+            br.DisplayMemberPath = "Value";
+            br.SelectedValuePath = "Key";
+        }
         private void loadYear()
         {
             for (int i = 2025; i <= DateTime.Now.Year; i++)
             {
                 month.Items.Add(i);
             }
-            BatchesB batchesB = new BatchesB();
-            br.ItemsSource = batchesB.loadBatch();
-            br.DisplayMemberPath = "Value";
-            br.SelectedValuePath = "Key";
         }
 
         private void Month_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -204,38 +208,9 @@ namespace LMS
                 int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
                 try
                 {
-                    DataTable table = new DataTable("Finance");
+                    SalaryB salary = new SalaryB();
 
-                    FeeB financeB = new FeeB();
-
-                    table = financeB.GetDataTable(selectedMonth);
-
-                    Report report = new Report();
-
-                    report.RegisterData(table, "Finance");
-                    report.GetDataSource("Finance").Enabled = true;
-
-
-                    string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "MonthlyReport.frx");
-
-                    if (File.Exists(reportPath))
-                    {
-                        report.Load(reportPath);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Report file not found: " + reportPath);
-                    }
-
-
-                    report.Prepare();
-
-                    string pdfFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MonthlyFinanceOutput.pdf");
-                    report.Export(new PDFSimpleExport(), pdfFilePath);
-
-                    WebBrowser pdfViewer = new WebBrowser();
-                    pdfViewer.Navigate(pdfFilePath);
-                    Content = pdfViewer;
+                    salary.OverallSalryReport(selectedMonth);
                 }
                 catch (Exception ex)
                 {
@@ -263,6 +238,7 @@ namespace LMS
             {
                 int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
                 int selectedBatch = Convert.ToInt32(br.SelectedValue.ToString());
+
                 try
                 {
                     DataTable table = new DataTable("Teacher_attendence");
@@ -271,8 +247,10 @@ namespace LMS
                     table = SalaryD.GetSalaryReport(selectedMonth, selectedBatch);
 
                     Report report = new Report();
-
+                    
                     report.RegisterData(table, "Teacher_attendence");
+
+
                     report.GetDataSource("Teacher_attendence").Enabled = true;
 
                     string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "TeacherAttendenceReport.frx");

@@ -9,6 +9,7 @@ using System.Windows;
 using LMS.BL;
 using Microsoft.Data.Sqlite;
 using WinFormsApp1;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace LMS.DL
 {
@@ -184,9 +185,23 @@ namespace LMS.DL
         }
         public static DataTable GetSalaryReport(int month, int branch)
         {
-            string query = $"Select * from salary_report where cast(strftime('%m', `Payment Date`) as INT) = {month}";
+            string query = $"Select Teacher, Salary, Deduction, `Payment Date`, Status, Branch from salary_report where cast(strftime('%m', `Payment Date`) as INT) = {month} and branch_id = {branch}";
             DataTable dataTable = new DataTable();
             dataTable = DatabaseHelper.Instance.GetTable(query);
+            return dataTable;
+        }
+        public static DataTable GetOverallSalary(int month)
+        {
+            DataTable dataTable = new DataTable();
+            try
+            {
+                string query = $"Select Teacher, Salary, Deduction, `Payment Date`, Status, Branch from salary_report where cast(strftime('%m', `Payment Date`) as INT) = {month}";
+                dataTable = DatabaseHelper.Instance.GetTable(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error : " + ex);
+            }
             return dataTable;
         }
     }

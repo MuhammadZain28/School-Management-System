@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -69,37 +70,45 @@ namespace LMS
         {
             if (id == 0)
             {
-                TeacherB teacherB = new TeacherB();
-                teacherB.name = name.Text;
-                teacherB.contact = Contact.Text;
-                teacherB.salary = Convert.ToInt32(salary.Text);
-                teacherB.Joining = Hiring.Text;
-                teacherB.designation = Job.Text;
-                if (Brach.SelectedValue is int selectedBranchId)
+                decimal temp;
+                if (decimal.TryParse(salary.Text, out temp))
                 {
-                    teacherB.branch.branchId = selectedBranchId;
-                }
-                else
-                {
-                    MessageBox.Show("Please select a branch.");
-                    return;
-                }
+                    TeacherB teacherB = new TeacherB();
+                    teacherB.name = name.Text;
+                    teacherB.contact = Contact.Text;
+                    teacherB.salary = Convert.ToInt32(salary.Text);
+                    teacherB.Joining = Hiring.Text;
+                    teacherB.designation = Job.Text;
+                    if (Brach.SelectedValue is int selectedBranchId)
+                    {
+                        teacherB.branch.branchId = selectedBranchId;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select a branch.");
+                        return;
+                    }
 
-                if (!string.IsNullOrWhiteSpace(Degree.Text) && !string.IsNullOrWhiteSpace(Institute.Text) && Year.SelectedItem == null)
-                {
-                    Addmore();
-                }
-                if (teacherB.addData(teacherB, qualificationBs))
-                {
-                    IsSaved = true;
-                    name.Text = "";
-                    Contact.Text = "";
-                    MessageBox.Show("Teacher Added Successfully");
-                    qualificationBs.Clear();
+                    if (!string.IsNullOrWhiteSpace(Degree.Text) && !string.IsNullOrWhiteSpace(Institute.Text) && Year.SelectedItem == null)
+                    {
+                        Addmore();
+                    }
+                    if (teacherB.addData(teacherB, qualificationBs))
+                    {
+                        IsSaved = true;
+                        name.Text = "";
+                        Contact.Text = "";
+                        MessageBox.Show("Teacher Added Successfully");
+                        qualificationBs.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("UnsuccessFul Try Again Later");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("UnsuccessFul Try Again Later");
+                    MessageBox.Show("Invalid Salary", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else if (count == 0)

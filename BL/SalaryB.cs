@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using LMS.DL;
+using OfficeOpenXml.Style;
+using OfficeOpenXml;
 
 namespace LMS.BL
 {
@@ -61,5 +65,81 @@ namespace LMS.BL
         {
             return SalaryD.GetAllSalary(month);
         }
+        public void OverallSalryReport(int month)
+        {
+
+            Dictionary<int, string> keyValuePairs = BatchesD.loadComboBoxBatch();
+            Dictionary<string, DataTable> pairs = new Dictionary<string, DataTable>();
+
+            foreach (var keyValue in keyValuePairs)
+            {
+                pairs.Add(
+                    keyValue.Value, // branch name
+                    SalaryD.GetSalaryReport(month, keyValue.Key) // branch data
+                );
+            }
+
+            var dialog = new Microsoft.Win32.SaveFileDialog
+            {
+                Filter = "Excel File (*.xlsx)|*.xlsx",
+                FileName = $"Salary_Report_{DateTime.Now:yyyy_MM_dd}.xlsx"
+            };
+
+            if (dialog.ShowDialog() != true)
+                return;
+
+            using (var package = new ExcelPackage())
+            {
+                var sheet = package.Workbook.Worksheets.Add("SalaryReport");
+                int currentRow = 1;
+
+                foreach (var entry in pairs)
+                {
+                    string branchName = entry.Key;
+                    DataTable dt = entry.Value;
+                    int colCount = dt.Columns.Count;
+
+                    // Merge header row
+                    var mergedHeader = sheet.Cells[currentRow, 1, currentRow, colCount];
+                    mergedHeader.Merge = true;
+                    mergedHeader.Value = $"Branch: {branchName}";
+                    mergedHeader.Style.Font.Bold = true;
+                    mergedHeader.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    currentRow++;
+
+                    // Column headers
+                    for (int i = 0; i < colCount; i++)
+                    {
+                        sheet.Cells[currentRow, i + 1].Value = dt.Columns[i].ColumnName;
+                        sheet.Cells[currentRow, i + 1].Style.Font.Bold = true;
+                        sheet.Cells[currentRow, i + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                        sheet.Cells[currentRow, i + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+                    }
+                    currentRow++;
+
+                    // Data rows
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        for (int i = 0; i < colCount; i++)
+                        {
+                            sheet.Cells[currentRow, i + 1].Value = row[i]?.ToString();
+                        }
+                        currentRow++;
+                    }
+
+                    currentRow++; // Extra space between branches
+                }
+
+                // Auto fit columns
+                sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+
+                // Save file
+                var file = new FileInfo(dialog.FileName);
+                package.SaveAs(file);
+            }
+
+            MessageBox.Show("Excel file with all branch data was saved successfully.", "Export Complete", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
     }
 }

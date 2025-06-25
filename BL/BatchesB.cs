@@ -22,12 +22,12 @@ namespace LMS.BL
                 return false;
             }
 
-            return new LMS.DL.BatchesD().addBatch(branch);
+            return BatchesD.addBatch(branch);
         }
 
         public Dictionary<int, string> loadBatch()
         {
-            Dictionary<int, string> batchesB = batchesD.loadComboBoxBatch();
+            Dictionary<int, string> batchesB = BatchesD.loadComboBoxBatch();
             batchesB.Add(-1, "---Select---");
             return batchesB;
         }
