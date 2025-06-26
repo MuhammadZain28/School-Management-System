@@ -228,11 +228,9 @@ namespace LMS
         {
             if (MainGrid.RowDefinitions.Count > 2)
             {
-                // Remove last child (if it's the one we added)
                 UIElement lastChild = MainGrid.Children[MainGrid.Children.Count - 1];
                 MainGrid.Children.Remove(lastChild);
 
-                // Remove last row definition
                 MainGrid.RowDefinitions.RemoveAt(MainGrid.RowDefinitions.Count - 1);
             }
         }

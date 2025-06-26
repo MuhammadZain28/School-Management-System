@@ -79,7 +79,7 @@ namespace LMS
         }
         public PlotModel studentPie()
         {
-            StudentB _student = new StudentB();
+            SalaryB salary = AttendenceD.GetCount(DateTime.Now.ToString("dd"));
             var model = new PlotModel { };
             var pieSeries = new PieSeries
             {
@@ -90,12 +90,12 @@ namespace LMS
                 InnerDiameter = 0.6
             };
 
-            pieSeries.Slices.Add(new PieSlice("", 70)
+            pieSeries.Slices.Add(new PieSlice("", salary.total_present)
             {
                 Fill = OxyColor.FromRgb(135, 206, 235)
             });
 
-            pieSeries.Slices.Add(new PieSlice("", 30)
+            pieSeries.Slices.Add(new PieSlice("", salary.total_absent)
             {
                 Fill = OxyColor.FromRgb(255, 165, 0)
             });

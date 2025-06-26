@@ -42,7 +42,7 @@
             <RowDefinition Height="150*"/>
             <RowDefinition Height="150*"/>
         </Grid.RowDefinitions>
-        <Frame x:Name="MainFrame" Grid.RowSpan="4"  Grid.Column="1" Grid.ColumnSpan="7" NavigationUIVisibility="Hidden" Panel.ZIndex="3" Navigated="MainFrame_Navigated" />
+        <Frame x:Name="MainFrame" Grid.RowSpan="4"  Grid.Column="1" Grid.ColumnSpan="7" NavigationUIVisibility="Hidden" Panel.ZIndex="3" Navigated="MainFrame_Navigated" Height="NaN" Margin="0,0,0,0" VerticalAlignment="Stretch" />
 
         <Border Margin="10,10,10,10" Grid.Row="1" Grid.Column="3" CornerRadius="15">
             <Border.Background>
@@ -161,8 +161,8 @@
                     <RowDefinition Height="20*"/>
                 </Grid.RowDefinitions>
                 <oxy:PlotView Model="{Binding PieModel}" Grid.ColumnSpan="2" Margin="1,10,1,0"/>
-                <Label Foreground="#2cb2d7" Content="O   Male" Margin="0,0,0,0" FontWeight="Bold" Grid.Row="1" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                <Label Foreground="#FFF49552" Content="O   Female" Margin="0,0,0,0" FontWeight="Bold" Grid.Row="1" Grid.Column="1" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Foreground="#2cb2d7" Content="O   Present" Margin="0,0,0,0" FontWeight="Bold" Grid.Row="1" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                <Label Foreground="#FFF49552" Content="O   Absent" Margin="0,0,0,0" FontWeight="Bold" Grid.Row="1" Grid.Column="1" FontSize="8" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
         <Border CornerRadius="25" Margin="10,0,10,10" Background="#FF223E8A" Padding="0" Grid.Column="6" Grid.Row="2" Grid.RowSpan="1">

@@ -24,7 +24,7 @@ namespace LMS
     public partial class SignUp : Page
     {
         private bool isPasswordVisible = false;
-        private bool isPasswordVisible1 = false;
+        private bool isConfirmPasswordVisible = false;
         public SignUp()
         {
             InitializeComponent();
@@ -37,15 +37,15 @@ namespace LMS
 
             if (isPasswordVisible)
             {
-                visibleBox.Text = ConfirmPasswordBox.Password;
+                visibleBox.Text = PasswordBox.Password;
                 visibleBox.Visibility = Visibility.Visible;
-                ConfirmPasswordBox.Visibility = Visibility.Collapsed;
+                PasswordBox.Visibility = Visibility.Collapsed;
                 toggleButton.Content = "🙈"; 
             }
             else
             {
-                ConfirmPasswordBox.Password = visibleBox.Text;
-                ConfirmPasswordBox.Visibility = Visibility.Visible;
+                PasswordBox.Password = visibleBox.Text;
+                PasswordBox.Visibility = Visibility.Visible;
                 visibleBox.Visibility = Visibility.Collapsed;
                 toggleButton.Content = "👁"; // Change icon to "view"
             }
@@ -54,44 +54,44 @@ namespace LMS
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (isPasswordVisible)
-                visibleBox.Text = ConfirmPasswordBox.Password;
+                visibleBox.Text = PasswordBox.Password;
         }
 
         private void VisibleBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!isPasswordVisible)
-                ConfirmPasswordBox.Password = visibleBox.Text;
+                PasswordBox.Password = visibleBox.Text;
         }
-        private void ToggleButton1_Click(object sender, RoutedEventArgs e)
+        private void ConfirmToggleButton_Click(object sender, RoutedEventArgs e)
         {
-            isPasswordVisible1 = !isPasswordVisible1;
+            isConfirmPasswordVisible = !isConfirmPasswordVisible;
 
-            if (isPasswordVisible1)
+            if (isConfirmPasswordVisible)
             {
-                visibleBox1.Text = PasswordBox1.Password;
-                visibleBox1.Visibility = Visibility.Visible;
-                PasswordBox1.Visibility = Visibility.Collapsed;
-                toggleButton1.Content = "🙈"; 
+                ConfirmvisibleBox.Text = ConfirmPasswordBox.Password;
+                ConfirmvisibleBox.Visibility = Visibility.Visible;
+                ConfirmPasswordBox.Visibility = Visibility.Collapsed;
+                ConfirmtoggleButton.Content = "🙈"; 
             }
             else
             {
-                PasswordBox1.Password = visibleBox1.Text;
-                PasswordBox1.Visibility = Visibility.Visible;
-                visibleBox1.Visibility = Visibility.Collapsed;
-                toggleButton1.Content = "👁"; 
+                ConfirmPasswordBox.Password = ConfirmvisibleBox.Text;
+                ConfirmPasswordBox.Visibility = Visibility.Visible;
+                ConfirmvisibleBox.Visibility = Visibility.Collapsed;
+                ConfirmtoggleButton.Content = "👁"; 
             }
         }
 
-        private void PasswordBox1_PasswordChanged(object sender, RoutedEventArgs e)
+        private void ConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (isPasswordVisible1)
-                visibleBox1.Text = PasswordBox1.Password;
+            if (isConfirmPasswordVisible)
+                ConfirmvisibleBox.Text = ConfirmPasswordBox.Password;
         }
 
-        private void VisibleBox1_TextChanged(object sender, TextChangedEventArgs e)
+        private void ConfirmVisibleBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!isPasswordVisible1)
-                PasswordBox1.Password = visibleBox1.Text;
+            if (!isConfirmPasswordVisible)
+                ConfirmPasswordBox.Password = ConfirmvisibleBox.Text;
         }
 
         private void sign_in_Click(object sender, RoutedEventArgs e)
@@ -101,7 +101,15 @@ namespace LMS
 
         private void sign_up_Click(object sender, RoutedEventArgs e)
         {
-            if (PasswordBox1.Password != ConfirmPasswordBox.Password)
+            if(isConfirmPasswordVisible)
+            {
+                ConfirmPasswordBox.Password = ConfirmvisibleBox.Text;
+            }
+            if (isPasswordVisible)
+            {
+                PasswordBox.Password = visibleBox.Text;
+            }
+            if (PasswordBox.Password != ConfirmPasswordBox.Password)
             {
                 MessageBox.Show("Passwords do not match.");
                 return;
@@ -110,7 +118,7 @@ namespace LMS
             string otp = NotificationD.GenerateOtp();
             if (NotificationD.SendOTP(Email.Text, otp))
             {
-                MainFrame.Navigate(new OTP(otp, Email.Text, PasswordBox1.Password, Phone.Text));
+                MainFrame.Navigate(new OTP(otp, Email.Text, PasswordBox.Password, Phone.Text));
             }
         }
         private void load()

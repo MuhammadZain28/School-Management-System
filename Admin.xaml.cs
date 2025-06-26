@@ -52,7 +52,6 @@ namespace LMS
             {
                 var storyboard = (Storyboard)FindResource("ExpandBorderStoryboard");
                 storyboard.Begin();
-
             }
             else
             {

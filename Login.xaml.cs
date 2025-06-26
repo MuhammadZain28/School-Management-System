@@ -26,6 +26,10 @@ namespace LMS
 
         private void sign_in_Click(object sender, RoutedEventArgs e)
         {
+            if (isPasswordVisible)
+            {
+                PasswordBox.Password = visibleBox.Text;
+            }
             UserB userB = new UserB(Email.Text, PasswordBox.Password);
            
             if (userB.signInFunc()) 

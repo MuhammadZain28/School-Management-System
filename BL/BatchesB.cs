@@ -12,6 +12,7 @@ namespace LMS.BL
     {
         public int branchId {  get; set; }
         public string BranchName { get; set; }
+        public decimal Salaries { get; set; }
 
         BatchesD batchesD = new BatchesD();
         public bool addBatch(string branch)

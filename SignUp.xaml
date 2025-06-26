@@ -48,10 +48,8 @@
         <TextBlock Margin="50,0,0,0" Grid.Column="2" Grid.Row="4" TextWrapping="Wrap" Text="Role" Height="28" FontSize="18" FontWeight="Bold" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Row="9" Grid.Column="2" Margin="50,0,50,0" CornerRadius="20" Background="#FFDCDADA" Grid.ColumnSpan="2">
             <Grid>
-                <PasswordBox x:Name="ConfirmPasswordBox" Margin="11,1,40,1"
-         BorderBrush="#72FFFFFF" BorderThickness="0"
-         VerticalAlignment="Center" FontSize="16"
-         PasswordChanged="PasswordBox_PasswordChanged" Background="{x:Null}">
+                <PasswordBox x:Name="ConfirmPasswordBox" Margin="11,1,40,1" BorderBrush="#72FFFFFF" BorderThickness="0" VerticalAlignment="Center" FontSize="16"
+                             PasswordChanged="ConfirmPasswordBox_PasswordChanged" Background="{x:Null}">
                     <PasswordBox.Style>
                         <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource {x:Type PasswordBox}}">
                             <Style.Triggers>
@@ -64,13 +62,10 @@
                     </PasswordBox.Style>
                 </PasswordBox>
 
-                <TextBox x:Name="visibleBox" Margin="11,1,40,1"
-     VerticalAlignment="Center" FontSize="16"
-     Visibility="Collapsed" TextChanged="VisibleBox_TextChanged" BorderThickness="0,0,0,0" Background="{x:Null}"/>
+                <TextBox x:Name="ConfirmvisibleBox" Margin="11,1,40,1" VerticalAlignment="Center" FontSize="16"
+                        Visibility="Collapsed" TextChanged="ConfirmVisibleBox_TextChanged" BorderThickness="0,0,0,0" Background="{x:Null}"/>
 
-                <Button x:Name="toggleButton" Content="👁"
-    Margin="0,0,10,0" Background="Transparent" BorderThickness="0"
-    Click="ToggleButton_Click" HorizontalAlignment="Right" Width="25"/>
+                <Button x:Name="ConfirmtoggleButton" Content="👁" Margin="0,0,10,0" Background="Transparent" BorderThickness="0" Click="ConfirmToggleButton_Click" HorizontalAlignment="Right" Width="25"/>
             </Grid>
         </Border>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Row="3" Grid.Column="2" Margin="50,0,50,0" CornerRadius="20" Background="#FFDCDADA" Grid.ColumnSpan="2">
@@ -130,10 +125,8 @@
         <Border BorderBrush="Black" BorderThickness="1" Grid.Row="7" Grid.Column="2"
         Margin="50,0,50,0" CornerRadius="20" Background="#FFDCDADA" Grid.ColumnSpan="2">
             <Grid>
-                <PasswordBox x:Name="PasswordBox1" Margin="11,1,40,1"
-                     BorderBrush="#72FFFFFF" BorderThickness="0"
-                     VerticalAlignment="Center" FontSize="16"
-                     PasswordChanged="PasswordBox_PasswordChanged" Background="{x:Null}">
+                <PasswordBox x:Name="PasswordBox" Margin="11,1,40,1" BorderBrush="#72FFFFFF" BorderThickness="0" VerticalAlignment="Center" FontSize="16"
+                             PasswordChanged="PasswordBox_PasswordChanged" Background="{x:Null}">
                     <PasswordBox.Style>
                         <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource {x:Type PasswordBox}}">
                             <Style.Triggers>
@@ -146,13 +139,11 @@
                     </PasswordBox.Style>
                 </PasswordBox>
 
-                <TextBox x:Name="visibleBox1" Margin="11,1,40,1"
-                 VerticalAlignment="Center" FontSize="16"
+                <TextBox x:Name="visibleBox" Margin="11,1,40,1" VerticalAlignment="Center" FontSize="16"
                  Visibility="Collapsed" TextChanged="VisibleBox_TextChanged" BorderThickness="0,0,0,0" Background="{x:Null}"/>
 
-                <Button x:Name="toggleButton1" Content="👁"
-                Margin="0,0,10,0" Background="Transparent" BorderThickness="0"
-                Click="ToggleButton1_Click" HorizontalAlignment="Right" Width="25"/>
+                <Button x:Name="toggleButton" Content="👁" Margin="0,0,10,0" Background="Transparent" BorderThickness="0"
+                Click="ToggleButton_Click" HorizontalAlignment="Right" Width="25"/>
             </Grid>
         </Border>
         <Frame x:Name="MainFrame" Grid.ColumnSpan="4" Grid.RowSpan="115" Panel.ZIndex="2" Margin="0" Navigated="MainFrame_Navigated"/>

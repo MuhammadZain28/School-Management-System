@@ -68,14 +68,15 @@ namespace LMS.BL
         public void OverallSalryReport(int month)
         {
 
-            Dictionary<int, string> keyValuePairs = BatchesD.loadComboBoxBatch();
+            int j = 0;
+            List<BatchesB> Branches = BatchesD.BranchSalaries();
             Dictionary<string, DataTable> pairs = new Dictionary<string, DataTable>();
 
-            foreach (var keyValue in keyValuePairs)
+            foreach (var keyValue in Branches)
             {
                 pairs.Add(
-                    keyValue.Value, // branch name
-                    SalaryD.GetSalaryReport(month, keyValue.Key) // branch data
+                    keyValue.BranchName, // branch name
+                    SalaryD.GetSalaryReport(month, keyValue.branchId) // branch data
                 );
             }
 
@@ -102,7 +103,7 @@ namespace LMS.BL
                     // Merge header row
                     var mergedHeader = sheet.Cells[currentRow, 1, currentRow, colCount];
                     mergedHeader.Merge = true;
-                    mergedHeader.Value = $"Branch: {branchName}";
+                    mergedHeader.Value = $"{branchName}";
                     mergedHeader.Style.Font.Bold = true;
                     mergedHeader.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     currentRow++;
@@ -127,6 +128,16 @@ namespace LMS.BL
                         currentRow++;
                     }
 
+                    sheet.Cells[currentRow, 1].Value = "Total :";
+                    sheet.Cells[currentRow, 1].Style.Font.Bold = true;
+                    sheet.Cells[currentRow, 1].Style.Fill.PatternType= ExcelFillStyle.Solid;
+                    sheet.Cells[currentRow, 1].Style.Fill.BackgroundColor.SetColor (System.Drawing.Color.LightGray);
+
+                    sheet.Cells[currentRow, 2].Value = Branches[j].Salaries;
+                    sheet.Cells[currentRow, 2].Style.Font.Bold = true;
+                    sheet.Cells[currentRow, 2].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    sheet.Cells[currentRow, 2].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
+                    j++;
                     currentRow++; // Extra space between branches
                 }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using LMS.BL;
 using Microsoft.Data.Sqlite;
 using MySql.Data.MySqlClient;
 using WinFormsApp1;
@@ -65,5 +66,32 @@ namespace LMS.DL
             }
             return batches;
         }
+        public static List<BatchesB> BranchSalaries()
+        {
+            List<BatchesB> batches = new List<BatchesB>();
+            try
+            {
+                string query = "SELECT Branch_id, Branch_name, sum(salary) FROM Branch NATURAL join Teachers natural join salary GROUP by Branch_id;";
+                SqliteDataReader reader = DatabaseHelper.Instance.getData(query);
+
+                while (reader.Read())
+                {
+                    batches.Add(new BatchesB
+                    {
+                        branchId = reader.GetInt32(0),
+                        BranchName = reader.GetString(1),   
+                        Salaries = reader.GetDecimal(2)
+                    });
+                }
+                reader.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return batches;
+        }
+
     }
 }

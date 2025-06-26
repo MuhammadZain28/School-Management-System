@@ -8,12 +8,19 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Admin">
     <Page.Resources>
+    <DropShadowEffect x:Key="BaseShadow" Color="Black" BlurRadius="10" Opacity="0" ShadowDepth="10"/>
+
         <Storyboard x:Key="ExpandBorderStoryboard">
             <DoubleAnimation
     Storyboard.TargetName="SideBar"
     Storyboard.TargetProperty="Width"
     To="200"
     Duration="0:0:0:0.5" />
+            <DoubleAnimation
+    Storyboard.TargetName="SideBar"
+    Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)"
+    To="0.4"
+    Duration="0:0:0:0.5"/>
         </Storyboard>
         <Storyboard x:Key="UnExpandBorderStoryboard">
             <DoubleAnimation
@@ -21,10 +28,15 @@
     Storyboard.TargetProperty="Width"
     To="70"
     Duration="0:0:0:0.5" />
+            <DoubleAnimation
+    Storyboard.TargetName="SideBar"
+    Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)"
+    To="0"
+    Duration="0:0:0:0.5"/>
         </Storyboard>
     </Page.Resources>
 
-    <Grid>
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70" Name="Side"/>
             <ColumnDefinition Width="10*"/>
@@ -43,7 +55,7 @@
         <Frame x:Name="MainFrame" Grid.RowSpan="4"  Grid.Column="1" Grid.ColumnSpan="7" NavigationUIVisibility="Hidden" Panel.ZIndex="1" />
         <Frame x:Name="LogFrame" Grid.RowSpan="4"  Grid.Column="0" Grid.ColumnSpan="8" NavigationUIVisibility="Hidden" Panel.ZIndex="10" Navigated="LogFrame_Navigated" />
 
-        <Border BorderBrush="Black" Grid.ColumnSpan="3" Width="70" CornerRadius="0,2,2,0" BorderThickness="0"  Background="White" Grid.RowSpan="4" Name="SideBar" HorizontalAlignment="Left" Panel.ZIndex="5">
+        <Border BorderBrush="Black" Grid.ColumnSpan="3" Width="70" CornerRadius="0,2,2,0" BorderThickness="0"  Background="White" Grid.RowSpan="4" Name="SideBar" HorizontalAlignment="Left" Panel.ZIndex="5" Effect="{StaticResource BaseShadow}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*"/>
@@ -63,12 +75,12 @@
                     <RowDefinition Height="45*"/>
                     <RowDefinition Height="45*"/>
                 </Grid.RowDefinitions>
-                <Image Source="pack://siteoforigin:,,,/images/logo (2).ico">
+                <Image Source="pack://siteoforigin:,,,/images/logo (2).ico" HorizontalAlignment="Left" VerticalAlignment="Center" MaxHeight="60" MaxWidth="60">
                     <Image.Effect>
                         <DropShadowEffect Color="#FFF6F6F6" BlurRadius="50" Opacity="0.4" ShadowDepth="1"/>
                     </Image.Effect>
                 </Image>
-                <Button x:Name="SideMenu" Content="⏵" Margin="0,18,0,0" Background="Transparent" Click="Menu" FontWeight="ExtraBold" FontSize="36" BorderBrush="Transparent" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="31" Foreground="#000000" Height="52" VerticalAlignment="Top"/>
+                <Button x:Name="SideMenu" Content="⏵" Background="Transparent" Click="Menu" FontWeight="Bold" FontSize="36" BorderThickness="0" BorderBrush="Transparent" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="31" Foreground="#000000" Height="52" VerticalAlignment="Center" FontFamily="Arial Black"/>
                 <Button Content="  📋  DASHBOARD" Margin="15,0,16,0" Click="Dashboard" Grid.Row="2" Grid.ColumnSpan="2" FontSize="20" BorderThickness="0,1,0,1" FontFamily="Impact">
                     <Button.Style>
                         <Style TargetType="Button">

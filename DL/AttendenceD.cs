@@ -263,6 +263,27 @@ namespace LMS.DL
 
             return count > 0;
         }
+        public static SalaryB GetCount(string month)
+        {
+            SalaryB teacherAttendenceB = new SalaryB();
+            try
+            {
+                string query = $"SELECT sum(case when status = 'P' then 1 else 0 end), sum(case when status = 'A' then 1 else 0 end) FROM teacher_attendence  WHERE strftime('%d', date) = '{month}';";
+                SqliteDataReader reader = DatabaseHelper.Instance.getData(query);
+                if (reader.Read())
+                {
+                    teacherAttendenceB.total_present = reader.GetInt32(0);
+                    teacherAttendenceB.total_absent = reader.GetInt32(1);   
+                }
+                reader.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error :" + e);
+            }
+
+            return teacherAttendenceB;
+        }
         public static DataTable attendenceReport(int month)
         {
             DataTable dt = new DataTable();
