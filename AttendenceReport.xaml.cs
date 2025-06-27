@@ -22,7 +22,7 @@ namespace LMS
             InitializeComponent();
             Choice = choice;
             loadBatch();
-            if (choice == 0 || choice == 2 || choice == 3 || choice == 4 || choice == 5)
+            if (choice == 0 || choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5)
                 loadMonth();
             else
             {
@@ -123,48 +123,6 @@ namespace LMS
                 int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
                 try
                 {
-                    DataTable table = new DataTable("Student");
-
-                    ResultB resultB = new ResultB();
-
-                    table = resultB.GetDataTable(selectedMonth);
-
-                    Report report = new Report();
-
-                    report.RegisterData(table, "Student");
-                    report.GetDataSource("Student").Enabled = true;
-
-                    string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "ResultReport.frx");
-
-                    if (File.Exists(reportPath))
-                    {
-                        report.Load(reportPath);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Report file not found: " + reportPath);
-                    }
-
-                    report.Prepare();
-
-                    string pdfFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ResultOutput.pdf");
-                    report.Export(new PDFSimpleExport(), pdfFilePath);
-
-                    WebBrowser pdfViewer = new WebBrowser();
-                    pdfViewer.Navigate(pdfFilePath);
-                    Content = pdfViewer;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error loading report: " + ex.Message);
-                }
-            }
-
-            else if (Choice == 2)
-            {
-                int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
-                try
-                {
                     DataTable table = new DataTable("Finance");
 
                     FeeB financeB = new FeeB();
@@ -197,6 +155,50 @@ namespace LMS
                     WebBrowser pdfViewer = new WebBrowser();
                     pdfViewer.Navigate(pdfFilePath);
                     Content = pdfViewer;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading report: " + ex.Message);
+                }
+            }
+
+            else if (Choice == 2)
+            {
+                int selectedMonth = Convert.ToInt32(month.SelectedValue.ToString());
+                try
+                {
+                    DataTable Branch = new DataTable("Branch");
+                    Branch = BatchesD.BranchSalariesTable();
+
+                    DataTable teacher = new DataTable("Teachers");
+                    teacher = SalaryD.GetOverallSalary(selectedMonth);
+
+                    Report report = new Report();
+
+
+                    report.RegisterData(Branch, "Branch");
+                    report.GetDataSource("Branch").Enabled = true;
+
+                    report.RegisterData(teacher, "Teachers");
+                    report.GetDataSource("Teachers").Enabled = true;
+
+                    string reportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports", "SalaryReport.frx");
+                    if (File.Exists(reportPath))
+                    {
+                        report.Load(reportPath);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Report not Found at "+reportPath,"Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    report.Prepare();
+
+                    string pdfFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SalaryReport.pdf");
+                    report.Export(new PDFSimpleExport(), pdfFilePath);
+
+                    WebBrowser webBrowser = new WebBrowser();
+                    webBrowser.Navigate(new Uri(pdfFilePath));
+                    Content = webBrowser;
                 }
                 catch (Exception ex)
                 {

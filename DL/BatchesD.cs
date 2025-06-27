@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,5 +94,21 @@ namespace LMS.DL
             return batches;
         }
 
+        public static DataTable BranchSalariesTable()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = "SELECT branch_id, branch_name FROM Branch NATURAL join Teachers natural join salary GROUP by branch_id;";
+
+                dt = DatabaseHelper.Instance.GetTable(query);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return dt;
+        }
     }
 }

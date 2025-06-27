@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Description="Demonstrates how to print a Master-detail report using the Table object. In this example the Table object is used to print both master and detail rows. It does not differ much from the &quot;Row Datasource&quot; example.&#13;&#10;See the &quot;ManualBuild&quot; event handler for more details." ReportInfo.Created="01/17/2008 20:40:24" ReportInfo.Modified="06/27/2025 15:43:07" ReportInfo.CreatorVersion="2025.2.2.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void Table1_ManualBuild(object sender, EventArgs e)
+    {
+      // get the master data source
+      DataSourceBase masterData = Report.GetDataSource(&quot;Branch&quot;);
+      // get the detail data source
+      DataSourceBase detailData = Report.GetDataSource(&quot;Teachers&quot;);
+      
+      // init the master data source
+      masterData.Init();
+      
+      while (masterData.HasMoreRows)
+      {
+        // print first 3 rows that contains data from master data source
+        Table1.PrintRow(0);
+        Table1.PrintColumns();
+        Table1.PrintRow(1);
+        Table1.PrintColumns();
+        Table1.PrintRow(2);
+        Table1.PrintColumns();
+
+        // init the detail data source. Pass masterData to allow master-detail relation
+        detailData.Init(masterData);
+
+        // print detail header
+        Table1.PrintRow(3);
+        Table1.PrintColumns();
+        
+        // print detail rows
+        while (detailData.HasMoreRows)
+        {
+          // print the detail row
+          if (masterData[&quot;branch_id&quot;].ToString() == detailData[&quot;branch_id&quot;].ToString())
+          {
+            Table1.PrintRow(4);
+            Table1.PrintColumns();
+          }
+        
+          // go next data source row
+          detailData.Next();
+        }
+
+        // print the detail footer row
+        Table1.PrintRow(5);
+        Table1.PrintColumns();
+        Table1.PrintRow(6);
+        Table1.PrintColumns();
+        
+        // go next data source row
+        masterData.Next();
+      }
+    }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <Relation Name="CategoriesProducts" ReferenceName="NorthWind.CategoriesProducts" ParentDataSource="Categories" ChildDataSource="Products" ParentColumns="CategoryID" ChildColumns="CategoryID" Enabled="true"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8" CanGrow="true">
+      <TextObject Name="Text2" Width="718.2" Height="37.8" Text="SALARY REPORT" HorzAlign="Center" VertAlign="Center" Font="Segoe UI, 14pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="40.47" Width="718.2" Height="151.2">
+      <TableObject Name="Table1" Left="9.45" Top="9.45" Width="699.3" Height="141.75" ManualBuildEvent="Table1_ManualBuild">
+        <TableColumn Name="Column1" Width="321.3"/>
+        <TableColumn Name="Column2" Width="189"/>
+        <TableColumn Name="Column3" Width="189"/>
+        <TableRow Name="Row5" Height="37.8">
+          <TableCell Name="Cell17" Fill.Color="110, 145, 190" Text="[Branch.branch_name]" VertAlign="Center" Font="Segoe UI, 16pt" TextFill.Color="White" ColSpan="3"/>
+          <TableCell Name="Cell18" Fill.Color="160, 120, 120" Font="Segoe UI, 10pt" TextFill.Color="White"/>
+          <TableCell Name="Cell19" Fill.Color="160, 120, 120" Font="Segoe UI, 10pt" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row4">
+          <TableCell Name="Cell14" Fill.Color="110, 145, 190" Text="[Branch.branch_id]" VertAlign="Center" Font="Segoe UI, 9pt" TextFill.Color="White" ColSpan="3"/>
+          <TableCell Name="Cell15" Fill.Color="160, 120, 120" Font="Segoe UI, 9pt" TextFill.Color="White"/>
+          <TableCell Name="Cell16" Fill.Color="160, 120, 120" Font="Segoe UI, 9pt" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row6" Height="9.45">
+          <TableCell Name="Cell20" Font="Segoe UI, 9pt"/>
+          <TableCell Name="Cell21" Font="Segoe UI, 9pt"/>
+          <TableCell Name="Cell22" Font="Segoe UI, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row1">
+          <TableCell Name="Cell1" Border.Lines="All" Border.Color="WhiteSmoke" Fill.Color="110, 145, 190" Text="EMPLOYEE" Padding="5, 0, 0, 0" VertAlign="Center" Font="Segoe UI, 9pt, style=Bold" TextFill.Color="White"/>
+          <TableCell Name="Cell2" Border.Lines="All" Border.Color="WhiteSmoke" Fill.Color="110, 145, 190" Text="DEDUCTION&#13;&#10;" Padding="0, 0, 5, 0" HorzAlign="Right" VertAlign="Center" Font="Segoe UI, 9pt, style=Bold" TextFill.Color="White"/>
+          <TableCell Name="Cell3" Border.Lines="All" Border.Color="WhiteSmoke" Fill.Color="110, 145, 190" Text="SALARY" HorzAlign="Center" VertAlign="Center" Font="Segoe UI, 9pt, style=Bold" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row2">
+          <TableCell Name="Cell6" Border.Lines="All" Border.Color="WhiteSmoke" Text="[Teachers.Teacher]" Padding="5, 0, 0, 0" VertAlign="Center" Font="Segoe UI, 9pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" Border.Color="WhiteSmoke" Text="[Teachers.deduction]" Padding="0, 0, 5, 0" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" Font="Segoe UI, 9pt"/>
+          <TableCell Name="Cell8" Border.Lines="All" Border.Color="WhiteSmoke" Text="[Teachers.salary]" HorzAlign="Center" VertAlign="Center" Font="Segoe UI, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row3">
+          <TableCell Name="Cell11" Border.Lines="All" Border.Color="WhiteSmoke" Fill.Color="110, 145, 190" VertAlign="Center" Font="Segoe UI, 9pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" Border.Color="WhiteSmoke" Fill.Color="110, 145, 190" Text="Total:" Padding="0, 0, 5, 0" HorzAlign="Right" VertAlign="Center" Font="Segoe UI, 9pt, style=Bold" TextFill.Color="White"/>
+          <TableCell Name="Cell13" Border.Lines="All" Border.Color="WhiteSmoke" Fill.Color="110, 145, 190" Text="[Sum(Cell8)]" HorzAlign="Center" VertAlign="Center" Font="Segoe UI, 9pt, style=Bold" TextFill.Color="White"/>
+        </TableRow>
+        <TableRow Name="Row7">
+          <TableCell Name="Cell23" Font="Segoe UI, 10pt"/>
+          <TableCell Name="Cell24" Font="Segoe UI, 10pt"/>
+          <TableCell Name="Cell25" Font="Segoe UI, 10pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="194.33" Width="718.2" Height="28.35" Fill.Color="WhiteSmoke">
+      <TextObject Name="Text1" Left="614.25" Width="94.5" Height="28.35" Text="[PageN]" HorzAlign="Right" VertAlign="Center" Font="Segoe UI, 9pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

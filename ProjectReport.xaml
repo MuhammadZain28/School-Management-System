@@ -46,7 +46,7 @@
             <Border.Effect>
                 <DropShadowEffect Opacity="0.2" BlurRadius="10" ShadowDepth="3" Direction="270"/>
             </Border.Effect>
-            <Button x:Name="teacher" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,1,10,1" Content="OVERALL SALARY REPORT" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" Click="teacher_Click" />
+            <Button x:Name="teacher" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,1,10,1" Content="OVERALL SALARY REPORT (.xlsx)" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" Click="teacher_Click" />
         </Border>
         <Border BorderBrush="Black" BorderThickness="0" CornerRadius="15,15,15,15" Background="White" Grid.ColumnSpan="2" Margin="0,0,5,0" Grid.Column="1" Grid.Row="2">
             <Border.Effect>
@@ -58,13 +58,13 @@
             <Border.Effect>
                 <DropShadowEffect Opacity="0.2" BlurRadius="10" ShadowDepth="3" Direction="270"/>
             </Border.Effect>
-            <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,1,10,1" Content="ANNUAL STUDENT PERFORMANCE" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" Click="Button_Click" />
+            <Button Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,1,10,1" Content="MONTHLY FEE REPORT" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" Click="Button_Click" />
         </Border>
         <Border BorderBrush="Black" BorderThickness="0" CornerRadius="15,15,15,15" Background="White" Grid.ColumnSpan="2" Margin="0,0,5,11" Grid.Row="4" Grid.Column="1" Grid.RowSpan="2">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.2" BlurRadius="10" ShadowDepth="3" Direction="270"/>
             </Border.Effect>
-            <Button x:Name="fee" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,1,10,1" Content="MONTHLY FEE" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" Click="fee_Click" />
+            <Button x:Name="fee" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,1,10,1" Content="OVERALL SALARY REPORT (.pdf)" Grid.ColumnSpan="2" FontSize="20" FontFamily="Impact" Grid.Row="1" Foreground="Black" Click="fee_Click" />
         </Border>
         <Border BorderBrush="Black" BorderThickness="0"  CornerRadius="15,15,15,15" Background="White" Grid.ColumnSpan="2" Margin="0,11,5,0" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2">
             <Border.Effect>

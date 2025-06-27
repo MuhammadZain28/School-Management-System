@@ -195,7 +195,7 @@ namespace LMS.DL
             DataTable dataTable = new DataTable();
             try
             {
-                string query = $"Select Teacher, Salary, Deduction, `Payment Date`, Status, Branch from salary_report where cast(strftime('%m', `Payment Date`) as INT) = {month}";
+                string query = $"Select Teacher, Salary, Deduction, branch_id from salary_report where cast(strftime('%m', `Payment Date`) as INT) = {month}";
                 dataTable = DatabaseHelper.Instance.GetTable(query);
             }
             catch (Exception ex)
